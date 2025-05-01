@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #4A90E2; /* Example primary color - blue */
+  --secondary-color: #F5A623; /* Example secondary color - orange */
+  --accent-color: #50E3C2; /* Example accent color - teal */
+  --text-color: #333;
+  --background-color: #FFFFFF;
+}
+
+/* Example: Dark mode variables (optional) */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --primary-color: #58A6FF; 
+    --secondary-color: #F7B731; 
+    --accent-color: #79E2D2; 
+    --text-color: #EAEAEA;
+    --background-color: #1A1A1A;
+  }
+}
+*/
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Poppins', sans-serif; /* Added Poppins font */
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Basic smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
