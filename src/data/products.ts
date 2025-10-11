@@ -6,55 +6,58 @@ import { Product } from "@/types/product";
 // Ensure imageUrl points to a valid image path in the /public folder (e.g., '/products/skincare1.jpg').
 
 export const demoProducts: Product[] = [
-  // Skincare Category
+  // Product 1: Brush (using image 1)
   {
     id: 1,
-    category: "avishek demo website..a brush",
-    title: "extremely soft brush",
-    price: 25.00,
-    description: " brushes that reach every corner of your teeth .",
-    imageUrl: "/products/skincare1.jpg", // Placeholder - image needed
+    category: "Brushes & Tools", // Cleaned up category
+    title: "Extremely Soft Brush",
+    price: 35.00,
+    description: "Brushes that reach every corner of your teeth.",
+    imageUrl: "/1000486451.jpg", // <--- UPDATED to your image
   },
+  // Product 2: Pen (using image 2)
   {
     id: 2,
-    category: " books store so a pen ",
-    title: "red pen",
+    category: "Stationery & Books", // Cleaned up category
+    title: "Red Smooth-Flow Pen",
     price: 10.00,
-    description: " extra smooth flow.",
-    imageUrl: "/products/skincare2.jpg", // Placeholder - image needed
+    description: "Extra smooth flow.",
+    imageUrl: "/1000486450.jpg", // <--- UPDATED to your image
   },
-  // Books Category
+  // Product 3: Water Color (using image 3)
   {
     id: 3,
-    category: "water colour artists ",
-    title: "water color ",
+    category: "Art Supplies", // Cleaned up category
+    title: "Premium Water Color Set",
     price: 50.00,
-    description: " premium quality at heavy discount.",
-    imageUrl: "/products/book1.jpg", // Placeholder - image needed
+    description: "Premium quality set at a heavy discount.",
+    imageUrl: "/1000486455.jpg", // <--- UPDATED to your image
   },
+  // Product 4: Black Shirt (using image 4)
   {
     id: 4,
-    category: "shirt",
-    title: "black shrt",
+    category: "Apparel", // Cleaned up category
+    title: "Black Comfort Shirt",
     price: 518.75,
-    description: "super comfortable shirt",
-    imageUrl: "/products/book2.jpg", // Placeholder - image needed
+    description: "Super comfortable shirt.",
+    imageUrl: "/1000486453.jpg", // <--- UPDATED to your image
   },
-  // Instruments Category
+  // Product 5: Glue (using image 5)
   {
     id: 5,
-    category: "fericryl",
-    title: "3d printed glue",
+    category: "Hobby & Craft", // Cleaned up category
+    title: "3D Printed Glue (Fevicryl)",
     price: 99.00,
-    description: "Beginner friendly design helper",
-    imageUrl: "/products/instrument1.jpg", // Placeholder - image needed
+    description: "Beginner friendly design helper.",
+    imageUrl: "/1000486581.jpg", // <--- UPDATED to your newest image
   },
+  // Product 6: Deep Black Shirt (Placeholder image)
   {
     id: 6,
-    category: "shirt",
-    title: " deep black shirt",
+    category: "Apparel", // Consistent category
+    title: "Deep Black T-Shirt",
     price: 559.95,
-    description: "comfortable",
+    description: "Comfortable.",
     imageUrl: "/products/instrument2.jpg", // Placeholder - image needed
   },
   // Gifts Category
@@ -114,4 +117,3 @@ export const getCategories = (): string[] => {
   const categories = demoProducts.map(product => product.category);
   return [...new Set(categories)]; // Return unique category names
 };
-
