@@ -9,18 +9,18 @@ export const demoProducts: Product[] = [
   // Skincare Category
   {
     id: 1,
-    category: "Skincare",
-    title: "Hydrating Face Cream",
-    price: 25.99,
-    description: "A light, non-greasy cream for daily hydration.",
+    category: "avishek demo website..a brush",
+    title: "extremely soft brush",
+    price: 25.00,
+    description: " brushes that reach every corner of your teeth .",
     imageUrl: "/products/skincare1.jpg", // Placeholder - image needed
   },
   {
     id: 2,
-    category: "Skincare",
-    title: "Vitamin C Serum",
-    price: 34.50,
-    description: "Brightens skin and reduces dark spots.",
+    category: " books store so a pen ",
+    title: "blue pen",
+    price: 10.00,
+    description: " extra smooth flow.",
     imageUrl: "/products/skincare2.jpg", // Placeholder - image needed
   },
   // Books Category
@@ -34,10 +34,10 @@ export const demoProducts: Product[] = [
   },
   {
     id: 4,
-    category: "Books",
-    title: "Atomic Habits",
-    price: 18.75,
-    description: "Build good habits and break bad ones.",
+    category: "shirt ",
+    title: "black shrt",
+    price: 518.75,
+    description: "super comfortable shirt",
     imageUrl: "/products/book2.jpg", // Placeholder - image needed
   },
   // Instruments Category
@@ -45,7 +45,7 @@ export const demoProducts: Product[] = [
     id: 5,
     category: "Instruments",
     title: "Acoustic Guitar",
-    price: 199.99,
+    price: 199.00,
     description: "Beginner-friendly acoustic guitar with warm tone.",
     imageUrl: "/products/instrument1.jpg", // Placeholder - image needed
   },
