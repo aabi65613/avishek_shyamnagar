@@ -18,7 +18,7 @@ export const demoProducts: Product[] = [
   {
     id: 2,
     category: " books store so a pen ",
-    title: "blue pen",
+    title: "red pen",
     price: 10.00,
     description: " extra smooth flow.",
     imageUrl: "/products/skincare2.jpg", // Placeholder - image needed
@@ -26,15 +26,15 @@ export const demoProducts: Product[] = [
   // Books Category
   {
     id: 3,
-    category: "Books",
-    title: "The Midnight Library",
-    price: 15.00,
-    description: "A novel about choices, regrets, and finding hope.",
+    category: "water colour artists ",
+    title: "water color ",
+    price: 50.00,
+    description: " premium quality at heavy discount.",
     imageUrl: "/products/book1.jpg", // Placeholder - image needed
   },
   {
     id: 4,
-    category: "shirt ",
+    category: "shirt",
     title: "black shrt",
     price: 518.75,
     description: "super comfortable shirt",
@@ -43,18 +43,18 @@ export const demoProducts: Product[] = [
   // Instruments Category
   {
     id: 5,
-    category: "Instruments",
-    title: "Acoustic Guitar",
-    price: 199.00,
-    description: "Beginner-friendly acoustic guitar with warm tone.",
+    category: "fericryl",
+    title: "3d printed glue",
+    price: 99.00,
+    description: "Beginner friendly design helper",
     imageUrl: "/products/instrument1.jpg", // Placeholder - image needed
   },
   {
     id: 6,
-    category: "Instruments",
-    title: "Ukulele Starter Kit",
-    price: 59.95,
-    description: "Includes ukulele, tuner, bag, and picks.",
+    category: "shirt",
+    title: " deep black shirt",
+    price: 559.95,
+    description: "comfortable",
     imageUrl: "/products/instrument2.jpg", // Placeholder - image needed
   },
   // Gifts Category
