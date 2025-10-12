@@ -5,61 +5,61 @@ import { Product } from "@/types/product";
 // IMPORTANT: Image names must EXACTLY match the file names in the /public folder.
 
 export const demoProducts: Product[] = [
-  // Product 1: Brush 
+  // Product 1: Brush (using IMG_20251011_221013_733.jpg)
   {
     id: 1,
-    category: "avishek demo website..a brush",
-    title: "extremely soft brush",
+    category: "Brushes & Tools",
+    title: "Extremely Soft Brush",
     price: 25.00,
-    description: " brushes that reach every corner of your teeth .",
+    description: "Brushes that reach every corner of your teeth.",
     imageUrl: "/IMG_20251011_221013_733.jpg", 
   },
-  // Product 2: Pen
+  // Product 2: Pen (using IMG_20251011_221616_284.jpg)
   {
     id: 2,
-    category: " books store so a pen ",
-    title: "red pen",
+    category: "Stationery",
+    title: "Red Pen",
     price: 10.00,
-    description: " extra smooth flow.",
+    description: "Extra smooth flow.",
     imageUrl: "/IMG_20251011_221616_284.jpg", 
   },
-  // Product 3: Water Color
+  // Product 3: Water Color (using IMG_20251011_221652_317.jpg)
   {
     id: 3,
-    category: "water colour artists ",
-    title: "water color ",
+    category: "Art Supplies",
+    title: "Water Color Set",
     price: 50.00,
-    description: " premium quality at heavy discount.",
+    description: "Premium quality set at a heavy discount.",
     imageUrl: "/IMG_20251011_221652_317.jpg", 
   },
-  // Product 4: Black Shirt
+  // Product 4: Black Shirt (using IMG_20251011_221710_762.jpg)
   {
     id: 4,
-    category: "shirt",
-    title: "black shrt",
+    category: "Apparel",
+    title: "Black Comfort Shirt",
     price: 518.75,
-    description: "super comfortable shirt",
+    description: "Super comfortable shirt",
     imageUrl: "/IMG_20251011_221710_762.jpg", 
   },
-  // Product 5: Glue
+  // Product 5: Glue (using IMG_20251011_221826_587.jpg)
   {
     id: 5,
-    category: "fericryl",
-    title: "3d printed glue",
+    category: "Hobby & Craft",
+    title: "3D Printed Glue",
     price: 99.00,
     description: "Beginner friendly design helper",
     imageUrl: "/IMG_20251011_221826_587.jpg", 
   },
-  // Product 6: Deep Black Shirt
+  // Product 6: Deep Black Shirt (using IMG_20251011_221833_765.jpg)
   {
     id: 6,
-    category: "shirt",
-    title: " deep black shirt",
+    category: "Apparel",
+    title: "Deep Black T-Shirt",
     price: 559.95,
-    description: "comfortable",
+    description: "Comfortable",
     imageUrl: "/IMG_20251011_221833_765.jpg", 
   },
-  // Product 7: Candle Set (using the last long-number name)
+  // Product 7: Candle Set (using original uploaded name 1000486851.jpg)
   {
     id: 7,
     category: "Gifts",
@@ -68,7 +68,7 @@ export const demoProducts: Product[] = [
     description: "Set of 3 relaxing aromatherapy candles.",
     imageUrl: "/1000486851.jpg", 
   },
-  // Remaining Products (Placeholders)
+  // Remaining Products (Placeholders - using original placeholder paths)
   {
     id: 8,
     category: "Gifts",
@@ -77,7 +77,6 @@ export const demoProducts: Product[] = [
     description: "Customizable mug, perfect for any occasion.",
     imageUrl: "/products/gift2.jpg", 
   },
-  // ... (rest of the products remain the same)
   {
     id: 9,
     category: "Experimental Items",
