@@ -2,7 +2,7 @@
 import { Product } from "@/types/product";
 
 // Demo product data - easy to edit
-// IMPORTANT: Image names must EXACTLY match the file names in the /public folder.
+// IMPORTANT: All image paths now assume the file is directly in the /public folder (e.g., /1000486851.jpg).
 
 export const demoProducts: Product[] = [
   // Product 1: Brush (using IMG_20251011_221013_733.jpg)
@@ -68,46 +68,50 @@ export const demoProducts: Product[] = [
     description: "Set of 3 relaxing aromatherapy candles.",
     imageUrl: "/1000486851.jpg", 
   },
-  // Remaining Products (Placeholders - using original placeholder paths)
+  // Product 8: Using uploaded image 1000486856.jpg
   {
     id: 8,
     category: "Gifts",
     title: "Personalized Mug",
     price: 12.50,
     description: "Customizable mug, perfect for any occasion.",
-    imageUrl: "/products/gift2.jpg", 
+    imageUrl: "/1000486856.jpg", 
   },
+  // Product 9: Using uploaded image 1000486857.jpg
   {
     id: 9,
     category: "Experimental Items",
     title: "DIY Terrarium Kit",
     price: 45.00,
     description: "Create your own mini ecosystem.",
-    imageUrl: "/products/exp1.jpg", 
+    imageUrl: "/1000486857.jpg", 
   },
+  // Product 10: Using uploaded image 1000486858.jpg
   {
     id: 10,
     category: "Experimental Items",
     title: "Levitating Plant Pot",
     price: 89.99,
     description: "A unique pot that floats using magnetic levitation.",
-    imageUrl: "/products/exp2.jpg", 
+    imageUrl: "/1000486858.jpg", 
   },
+  // Product 11: Using uploaded image 1000486850.jpg
   {
     id: 11,
     category: "Books",
-    title: "Project Hail Mary",
+    title: "The Midnight Library",
     price: 16.50,
-    description: "An astronaut must save Earth from disaster.",
-    imageUrl: "/products/book3.jpg", 
+    description: "A novel about choices, regrets, and finding hope.",
+    imageUrl: "/1000486850.jpg", 
   },
+  // Product 12: Using uploaded image 1000486455.jpg
   {
     id: 12,
     category: "Skincare",
     title: "Gentle Face Cleanser",
     price: 19.99,
     description: "Removes impurities without drying the skin.",
-    imageUrl: "/products/skincare3.jpg", 
+    imageUrl: "/1000486455.jpg", 
   },
 ];
 
