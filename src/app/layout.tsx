@@ -4,7 +4,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { CartProvider } from "@/context/CartContext"; // Import CartProvider
+import { CartProvider } from "@/context/CartContext";
+import { Toaster } from "sonner"; // <--- ADDED IMPORT FOR TOASTER
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,17 +24,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} flex flex-col min-h-screen`}>
-        {/* Wrap the main content with CartProvider */}
+      {/* Added class names here for text/background colors from globals.css */}
+      <body className={`${poppins.className} flex flex-col min-h-screen bg-white text-text-color`}>
         <CartProvider>
           <Header />
           <main className="flex-grow">
             {children}
           </main>
           <Footer />
+          {/* TOASTER for smooth, premium notifications, using the Gold (secondary) color */}
+          <Toaster richColors position="top-right" /> 
         </CartProvider>
       </body>
     </html>
   );
 }
-
