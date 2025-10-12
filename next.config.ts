@@ -1,7 +1,8 @@
-// next.config.js - CHANGED TO STANDARD JAVASCRIPT
+// next.config.ts - Corrected for TypeScript
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
   // Retained your existing configurations
   eslint: {
     ignoreDuringBuilds: true,
@@ -10,12 +11,12 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // --- IMAGE CONFIGURATION FIX (Critical) ---
+  // --- IMAGE & BUILD CONFIGURATION FIX ---
   images: {
-    // Setting this property is what fixes the image red cross issue
+    // This is the critical line to fix the persistent "red cross" broken image issue
     unoptimized: true,
   },
   // ------------------------------------------
-};
+}
 
-module.exports = nextConfig;
+export default nextConfig
