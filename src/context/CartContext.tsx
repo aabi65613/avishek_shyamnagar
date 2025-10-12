@@ -1,117 +1,117 @@
-// src/context/CartContext.tsx
-"use client";
+// src/data/products.ts
+import { Product } from "@/types/product";
 
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
-import { Product } from '@/types/product';
+// IMPORTANT: Image names must EXACTLY match the file names in the /public folder.
 
-// Define the structure for an item in the cart
-interface CartItem extends Product {
-  quantity: number;
-}
+export const demoProducts: Product[] = [
+  // Product 1: Brush 
+  {
+    id: 1,
+    category: "Brushes & Tools", 
+    title: "Extremely Soft Brush",
+    price: 25.00,
+    description: "Brushes that reach every corner of your teeth.",
+    imageUrl: "/IMG_20251011_221013_733.jpg", 
+  },
+  // Product 2: Pen
+  {
+    id: 2,
+    category: "Stationery",
+    title: "Red Pen",
+    price: 10.00,
+    description: "Extra smooth flow.",
+    imageUrl: "/IMG_20251011_221616_284.jpg", 
+  },
+  // Product 3: Water Color
+  {
+    id: 3,
+    category: "Art Supplies", 
+    title: "Water Color Set",
+    price: 50.00,
+    description: "Premium quality set at a heavy discount.",
+    imageUrl: "/IMG_20251011_221652_317.jpg", 
+  },
+  // Product 4: Black Shirt
+  {
+    id: 4,
+    category: "Apparel", 
+    title: "Black Comfort Shirt",
+    price: 518.75,
+    description: "Super comfortable shirt",
+    imageUrl: "/IMG_20251011_221710_762.jpg", 
+  },
+  // Product 5: Glue
+  {
+    id: 5,
+    category: "Hobby & Craft", 
+    title: "3D Printed Glue",
+    price: 99.00,
+    description: "Beginner friendly design helper",
+    imageUrl: "/IMG_20251011_221826_587.jpg", 
+  },
+  // Product 6: Deep Black Shirt
+  {
+    id: 6,
+    category: "Apparel", 
+    title: "Deep Black T-Shirt",
+    price: 559.95,
+    description: "Comfortable",
+    imageUrl: "/IMG_20251011_221833_765.jpg", 
+  },
+  // Product 7: Candle Set (using original uploaded name)
+  {
+    id: 7,
+    category: "Gifts",
+    title: "Scented Candle Set",
+    price: 29.99,
+    description: "Set of 3 relaxing aromatherapy candles.",
+    imageUrl: "/1000486851.jpg", 
+  },
+  // Remaining Products (Placeholders)
+  {
+    id: 8,
+    category: "Gifts",
+    title: "Personalized Mug",
+    price: 12.50,
+    description: "Customizable mug, perfect for any occasion.",
+    imageUrl: "/products/gift2.jpg", 
+  },
+  {
+    id: 9,
+    category: "Experimental Items",
+    title: "DIY Terrarium Kit",
+    price: 45.00,
+    description: "Create your own mini ecosystem.",
+    imageUrl: "/products/exp1.jpg", 
+  },
+  {
+    id: 10,
+    category: "Experimental Items",
+    title: "Levitating Plant Pot",
+    price: 89.99,
+    description: "A unique pot that floats using magnetic levitation.",
+    imageUrl: "/products/exp2.jpg", 
+  },
+  {
+    id: 11,
+    category: "Books",
+    title: "Project Hail Mary",
+    price: 16.50,
+    description: "An astronaut must save Earth from disaster.",
+    imageUrl: "/products/book3.jpg", 
+  },
+  {
+    id: 12,
+    category: "Skincare",
+    title: "Gentle Face Cleanser",
+    price: 19.99,
+    description: "Removes impurities without drying the skin.",
+    imageUrl: "/products/skincare3.jpg", 
+  },
+];
 
-// Define the shape of the Cart Context
-interface CartContextType {
-  cartItems: CartItem[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  clearCart: () => void;
-  getCartTotal: () => number;
-  getItemCount: () => number;
-}
-
-// Create the Cart Context
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-// Custom hook to use the Cart Context
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
+// Function to get all unique categories from the products
+export const getCategories = (): string[] => {
+  const categories = demoProducts.map(product => product.category);
+  return [...new Set(categories)]; // Return unique category names
 };
-
-// Cart Provider component
-interface CartProviderProps {
-  children: ReactNode;
-}
-
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  // Load cart from localStorage on initial render
-  useEffect(() => {
-    const storedCart = localStorage.getItem('shoppingCart');
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
-    }
-  }, []);
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  // Function to add a product to the cart
-  const addToCart = (product: Product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
-      if (existingItem) {
-        // If item exists, increase quantity
-        return prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        // If item doesn't exist, add it with quantity 1
-        return [...prevItems, { ...product, quantity: 1 }];
-      }
-    });
-  };
-
-  // Function to remove a product from the cart
-  const removeFromCart = (productId: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-  };
-
-  // Function to update the quantity of a product in the cart
-  const updateQuantity = (productId: number, quantity: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity: Math.max(0, quantity) } : item // Ensure quantity doesn't go below 0
-      ).filter(item => item.quantity > 0) // Remove item if quantity is 0
-    );
-  };
-
-  // Function to clear the entire cart
-  const clearCart = () => {
-    setCartItems([]);
-  };
-
-  // Function to calculate the total price of items in the cart
-  const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-
-   // Function to get the total number of items in the cart
-  const getItemCount = () => {
-    return cartItems.reduce((count, item) => count + item.quantity, 0);
-  };
-
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        getCartTotal,
-        getItemCount,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-};
-
