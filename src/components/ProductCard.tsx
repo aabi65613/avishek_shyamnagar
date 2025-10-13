@@ -1,4 +1,4 @@
-// src/components/ProductCard.tsx - FINAL CURRENCY & BUILD FIX
+// src/components/ProductCard.tsx - FINAL FIX: Removed 'index' from destructuring
 "use client";
 
 import React from 'react';
@@ -6,14 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-// import { motion } from 'framer-motion'; 
 
 interface ProductCardProps {
   product: Product;
   index: number; 
 }
 
-// Currency formatter defined INLINE (to avoid import errors) - KEEPS RUPEE LOGIC
+// Currency formatter defined INLINE (KEEPS RUPEE LOGIC)
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -22,8 +21,8 @@ const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
-// Destructure as { product, index: _index } to silence the unused warning
-const ProductCard: React.FC<ProductCardProps> = ({ product, index: _index }) => {
+// FIX: Only destructure 'product' to fix the unused 'index' error.
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
 
   return (
@@ -46,7 +45,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index: _index }) => 
       </Link>
       
       <div className="p-4 flex flex-col flex-grow">
-        {/* Title and Category using brand colors */}
         <p className="text-xs font-medium text-secondary-color uppercase tracking-wider mb-1">
           {product.category}
         </p>
@@ -56,12 +54,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index: _index }) => 
           </Link>
         </h3>
 
-        {/* Price using primary color - NOW RUPEES */}
         <div className="text-xl font-bold text-primary-color mb-3 mt-auto">
           {formatCurrency(product.price)}
         </div>
 
-        {/* Add to Cart Button (Animated) */}
         <button
           onClick={() => addToCart(product)}
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
