@@ -1,10 +1,10 @@
-// next.config.ts - FINAL CLEANUP
+// next.config.ts - ABSOLUTE FINAL CLEANUP
 
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Add any standard Next.js config here (e.g., images: { domains: [...] })
-  // But DO NOT add Tailwind config (content, theme, plugins, etc.)
+  // This file should be empty of all 'content', 'theme', 'plugins', etc.
+  // The empty object {} is sufficient for a minimal config.
 };
 
 export default nextConfig;
