@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
+// import { motion } from 'framer-motion'; // <-- RE-COMMENTED OUT: Build Fix
 
 interface ProductCardProps {
   product: Product;
@@ -16,10 +16,8 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
-  // The motionVariants logic is removed/ignored since we are using a standard <div>
-  
+  // Replaced motion.div with standard <div> and removed motion props (variants, initial, etc.)
   return (
-    // Replaced motion.div with standard <div> and removed motion props (variants, initial, etc.)
     <div
       className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
     >
@@ -56,7 +54,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
         </div>
 
         {/* Add to Cart Button (Animated) */}
-        {/* Replaced motion.button with standard <button> */}
         <button
           onClick={() => addToCart(product)}
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
