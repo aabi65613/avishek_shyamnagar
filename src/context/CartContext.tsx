@@ -1,117 +1,116 @@
-// src/data/products.ts
-import { Product } from "@/types/product";
+// src/context/CartContext.tsx - Corrected Exports
+"use client";
 
-// IMPORTANT: Image names must EXACTLY match the file names in the /public folder.
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+// import { toast } from 'sonner'; // NOTE: Commented out for Vercel build fix
 
-export const demoProducts: Product[] = [
-  // Product 1: Brush 
-  {
-    id: 1,
-    category: "Brushes & Tools", 
-    title: "Extremely Soft Brush",
-    price: 25.00,
-    description: "Brushes that reach every corner of your teeth.",
-    imageUrl: "/IMG_20251011_221013_733.jpg", 
-  },
-  // Product 2: Pen
-  {
-    id: 2,
-    category: "Stationery",
-    title: "Red Pen",
-    price: 10.00,
-    description: "Extra smooth flow.",
-    imageUrl: "/IMG_20251011_221616_284.jpg", 
-  },
-  // Product 3: Water Color
-  {
-    id: 3,
-    category: "Art Supplies", 
-    title: "Water Color Set",
-    price: 50.00,
-    description: "Premium quality set at a heavy discount.",
-    imageUrl: "/IMG_20251011_221652_317.jpg", 
-  },
-  // Product 4: Black Shirt
-  {
-    id: 4,
-    category: "Apparel", 
-    title: "Black Comfort Shirt",
-    price: 518.75,
-    description: "Super comfortable shirt",
-    imageUrl: "/IMG_20251011_221710_762.jpg", 
-  },
-  // Product 5: Glue
-  {
-    id: 5,
-    category: "Hobby & Craft", 
-    title: "3D Printed Glue",
-    price: 99.00,
-    description: "Beginner friendly design helper",
-    imageUrl: "/IMG_20251011_221826_587.jpg", 
-  },
-  // Product 6: Deep Black Shirt
-  {
-    id: 6,
-    category: "Apparel", 
-    title: "Deep Black T-Shirt",
-    price: 559.95,
-    description: "Comfortable",
-    imageUrl: "/IMG_20251011_221833_765.jpg", 
-  },
-  // Product 7: Candle Set (using original uploaded name)
-  {
-    id: 7,
-    category: "Gifts",
-    title: "Scented Candle Set",
-    price: 29.99,
-    description: "Set of 3 relaxing aromatherapy candles.",
-    imageUrl: "/1000486851.jpg", 
-  },
-  // Remaining Products (Placeholders)
-  {
-    id: 8,
-    category: "Gifts",
-    title: "Personalized Mug",
-    price: 12.50,
-    description: "Customizable mug, perfect for any occasion.",
-    imageUrl: "/products/gift2.jpg", 
-  },
-  {
-    id: 9,
-    category: "Experimental Items",
-    title: "DIY Terrarium Kit",
-    price: 45.00,
-    description: "Create your own mini ecosystem.",
-    imageUrl: "/products/exp1.jpg", 
-  },
-  {
-    id: 10,
-    category: "Experimental Items",
-    title: "Levitating Plant Pot",
-    price: 89.99,
-    description: "A unique pot that floats using magnetic levitation.",
-    imageUrl: "/products/exp2.jpg", 
-  },
-  {
-    id: 11,
-    category: "Books",
-    title: "Project Hail Mary",
-    price: 16.50,
-    description: "An astronaut must save Earth from disaster.",
-    imageUrl: "/products/book3.jpg", 
-  },
-  {
-    id: 12,
-    category: "Skincare",
-    title: "Gentle Face Cleanser",
-    price: 19.99,
-    description: "Removes impurities without drying the skin.",
-    imageUrl: "/products/skincare3.jpg", 
-  },
-];
+import { Product } from '@/types/product';
 
-// Function to get all unique categories from the products
-export const getCategories = (): string[] => {
-  const categories = demoProducts.map(product => product.category);
-  return [...new Set(categories)]; // Return unique category names
+// Define the structure of an item in the cart
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+// Define the structure of the Cart Context
+interface CartContextType {
+  cartItems: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productId: number) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
+  clearCart: () => void;
+}
+
+// Create the context
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+// Define the Provider component (MUST be EXPORTED)
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => { // <-- EXPORT ADDED
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    const storedCart = localStorage.getItem('shoppingCart');
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+
+  const addToCart = useCallback((product: Product, quantity: number = 1) => {
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(item => item.id === product.id);
+
+      if (existingItem) {
+        // Update quantity of existing item
+        const newItems = prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+        // toast.success(`Updated ${product.title} quantity in cart!`); // NOTE: Commented out for Vercel build fix
+        return newItems;
+      } else {
+        // Add new item to cart
+        const newItem = { ...product, quantity };
+        // toast.success(`${product.title} added to cart!`); // NOTE: Commented out for Vercel build fix
+        return [...prevItems, newItem];
+      }
+    });
+  }, []);
+
+  const removeFromCart = useCallback((productId: number) => {
+    setCartItems(prevItems => {
+      const itemToRemove = prevItems.find(item => item.id === productId);
+      const newItems = prevItems.filter(item => item.id !== productId);
+      // if (itemToRemove) {
+      //   toast.info(`${itemToRemove.title} removed from cart.`); // NOTE: Commented out for Vercel build fix
+      // }
+      return newItems;
+    });
+  }, []);
+
+  const updateQuantity = useCallback((productId: number, quantity: number) => {
+    if (quantity < 1) {
+      removeFromCart(productId);
+      return;
+    }
+
+    setCartItems(prevItems =>
+      prevItems.map(item =>
+        item.id === productId ? { ...item, quantity } : item
+      )
+    );
+  }, [removeFromCart]);
+
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+    // toast.warning("Cart cleared!"); // NOTE: Commented out for Vercel build fix
+  }, []);
+
+  // The context value
+  const contextValue: CartContextType = {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+  };
+
+  return (
+    <CartContext.Provider value={contextValue}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+// Define the useCart hook (MUST be EXPORTED)
+export const useCart = () => { // <-- EXPORT ADDED
+  const context = useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 };
