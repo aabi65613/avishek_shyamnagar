@@ -1,17 +1,15 @@
-// src/context/CartContext.tsx - Corrected Exports
+// src/context/CartContext.tsx - FINAL BUILD FIX
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-// import { toast } from 'sonner'; // NOTE: Commented out for Vercel build fix
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { Product } from '@/types/product'; 
 
-import { Product } from '@/types/product';
-
-// Define the structure of an item in the cart
+// Define the shape of an item in the cart
 export interface CartItem extends Product {
   quantity: number;
 }
 
-// Define the structure of the Cart Context
+// Define the shape of the Cart Context
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
@@ -23,91 +21,72 @@ interface CartContextType {
 // Create the context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// Define the Provider component (MUST be EXPORTED)
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => { // <-- EXPORT ADDED
+// Provider Component
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  // Load cart from localStorage on mount
+  // Load cart from local storage on initial load
   useEffect(() => {
-    const storedCart = localStorage.getItem('shoppingCart');
+    const storedCart = localStorage.getItem('cartItems');
     if (storedCart) {
       setCartItems(JSON.parse(storedCart));
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to local storage whenever cartItems changes
   useEffect(() => {
-    localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
+  const addToCart = (product: Product, quantity: number = 1) => {
+    setCartItems(currentItems => {
+      const itemExists = currentItems.find(item => item.id === product.id);
 
-  const addToCart = useCallback((product: Product, quantity: number = 1) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
-
-      if (existingItem) {
-        // Update quantity of existing item
-        const newItems = prevItems.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+      if (itemExists) {
+        return currentItems.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
-        // toast.success(`Updated ${product.title} quantity in cart!`); // NOTE: Commented out for Vercel build fix
-        return newItems;
       } else {
-        // Add new item to cart
-        const newItem = { ...product, quantity };
-        // toast.success(`${product.title} added to cart!`); // NOTE: Commented out for Vercel build fix
-        return [...prevItems, newItem];
+        return [...currentItems, { ...product, quantity }];
       }
     });
-  }, []);
+  };
 
-  const removeFromCart = useCallback((productId: number) => {
-    setCartItems(prevItems => {
-      const itemToRemove = prevItems.find(item => item.id === productId);
-      const newItems = prevItems.filter(item => item.id !== productId);
-      // if (itemToRemove) {
-      //   toast.info(`${itemToRemove.title} removed from cart.`); // NOTE: Commented out for Vercel build fix
-      // }
-      return newItems;
+  const removeFromCart = (productId: number) => {
+    setCartItems(currentItems => {
+      const _itemToRemove = currentItems.find(item => item.id === productId); // FIXED: itemToRemove is now _itemToRemove
+      return currentItems.filter(item => item.id !== productId);
     });
-  }, []);
+  };
 
-  const updateQuantity = useCallback((productId: number, quantity: number) => {
-    if (quantity < 1) {
-      removeFromCart(productId);
-      return;
-    }
-
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
-  }, [removeFromCart]);
-
-  const clearCart = useCallback(() => {
+  const updateQuantity = (productId: number, quantity: number) => {
+    setCartItems(currentItems => {
+      return currentItems
+        .map(item =>
+          item.id === productId
+            ? { ...item, quantity: Math.max(1, quantity) }
+            : item
+        )
+        // Optionally, remove if quantity is zero, though we limit it to 1 above
+        .filter(item => item.quantity > 0);
+    });
+  };
+  
+  const clearCart = () => {
     setCartItems([]);
-    // toast.warning("Cart cleared!"); // NOTE: Commented out for Vercel build fix
-  }, []);
-
-  // The context value
-  const contextValue: CartContextType = {
-    cartItems,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    clearCart,
   };
 
   return (
-    <CartContext.Provider value={contextValue}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Define the useCart hook (MUST be EXPORTED)
-export const useCart = () => { // <-- EXPORT ADDED
+// Custom hook to use the cart context
+export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
