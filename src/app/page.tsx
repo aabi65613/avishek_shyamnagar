@@ -5,18 +5,16 @@ import React from 'react';
 import ProductCard from '@/components/ProductCard';
 // Removed unused import 'getCategories'
 import { demoProducts } from '@/data/products'; 
-// import { motion } from 'framer-motion'; 
 
 const HomePage = () => {
   const products = demoProducts.slice(0, 9); 
-  // const categories = getCategories(); // Variable no longer defined
 
   const featuredProducts = products.filter(p => p.id <= 9); 
 
   return (
     <div className="min-h-screen">
       
-      {/* Hero Section with Brand Colors */}
+      {/* Hero Section with Brand Colors - CRITICAL: bg-background-color */}
       <section className="text-center py-24 px-4 bg-background-color text-white shadow-lg">
         <div className="container mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold text-primary-color mb-4 leading-tight">
