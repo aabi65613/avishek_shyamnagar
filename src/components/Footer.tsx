@@ -1,7 +1,7 @@
 // src/components/Footer.tsx
 import React from 'react';
 import Link from 'next/link';
-// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
+// import { motion } from 'framer-motion'; // <-- RE-COMMENTED OUT: Build Fix
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 const Footer = () => {
@@ -26,19 +26,16 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/" className="text-gray-300 hover:text-secondary-color transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/about" className="text-gray-300 hover:text-secondary-color transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/contact" className="text-gray-300 hover:text-secondary-color transition-colors">
                   Contact
                 </Link>
@@ -51,19 +48,16 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Service</h4>
             <ul className="space-y-2">
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/faq" className="text-gray-300 hover:text-secondary-color transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/shipping" className="text-gray-300 hover:text-secondary-color transition-colors">
                   Shipping & Returns
                 </Link>
               </li>
               <li>
-                {/* Replaced motion.a with standard <Link> */}
                 <Link href="/terms" className="text-gray-300 hover:text-secondary-color transition-colors">
                   Terms of Service
                 </Link>
@@ -75,15 +69,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Connect</h4>
             <div className="flex space-x-4">
-              {/* Replaced motion.a with standard <a> */}
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
                 <Facebook size={20} />
               </a>
-              {/* Replaced motion.a with standard <a> */}
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
                 <Instagram size={20} />
               </a>
-              {/* Replaced motion.a with standard <a> */}
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
                 <Twitter size={20} />
               </a>
