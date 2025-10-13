@@ -1,16 +1,18 @@
-// src/app/cart/page.tsx - CLEAN VERSION
+// src/app/cart/page.tsx - Updated Checkout Logic & Rupee Currency
 "use client";
 
-import React from 'react';
+import React, { useCallback } from 'react'; // useCallback is used for the checkout function
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, XCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { formatCurrency } from '@/utils/format'; // <-- NEW IMPORT
 // import { motion, AnimatePresence } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
 
+  // --- START CURRENCY/CALCULATION LOGIC ---
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -19,7 +21,14 @@ const CartPage = () => {
   const shipping = subtotal > 0 ? 5.0 : 0.0;
   const total = subtotal + shipping;
 
-  // The itemVariants object is also temporarily removed for a clean build
+  // --- PROCEED TO CHECKOUT LOGIC: CALL NUMBER ---
+  // Replaces the standard checkout process with a direct call to your number
+  const handleProceedToCheckout = useCallback(() => {
+    // NOTE: Replace '91XXXXXXXXXX' with your actual phone number (including +91 if needed)
+    const phoneNumber = '91XXXXXXXXXX'; 
+    window.location.href = `tel:+${phoneNumber}`;
+  }, []);
+  // --- END CHECKOUT LOGIC ---
 
   if (cartItems.length === 0) {
     return (
@@ -45,7 +54,7 @@ const CartPage = () => {
 
       <div className="flex flex-col lg:flex-row gap-10">
         
-        {/* Cart Items List - Takes up the main space */}
+        {/* Cart Items List */}
         <div className="lg:w-3/5 space-y-6">
           <div className="flex justify-between items-center pb-2 border-b">
             <h2 className="text-xl font-semibold text-text-color">Items ({cartItems.length})</h2>
@@ -58,10 +67,7 @@ const CartPage = () => {
             </button>
           </div>
 
-          {/* AnimatePresence and motion.div are commented out */}
-          {/* <AnimatePresence initial={false}> */}
-            {cartItems.map((item) => (
-              // Replaced <motion.div> with standard <div>
+          {cartItems.map((item) => (
               <div 
                 key={item.id} 
                 className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
@@ -105,10 +111,10 @@ const CartPage = () => {
                   </button>
                 </div>
 
-                {/* Price & Remove */}
+                {/* Price & Remove - NOW RUPEES */}
                 <div className="flex flex-col items-end min-w-[100px]">
                   <span className="text-lg font-bold text-primary-color mb-1">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {formatCurrency(item.price * item.quantity)} {/* <-- RUPEE FORMAT APPLIED */}
                   </span>
                   <button
                     onClick={() => removeFromCart(item.id)}
@@ -120,10 +126,9 @@ const CartPage = () => {
                 </div>
               </div>
             ))}
-          {/* </AnimatePresence> */}
         </div>
         
-        {/* Order Summary - Fixed size */}
+        {/* Order Summary - NOW RUPEES */}
         <div className="lg:w-2/5 sticky top-20">
           <div className="bg-white p-6 rounded-lg shadow-xl border-t-4 border-secondary-color">
             <h2 className="text-2xl font-bold text-primary-color mb-6 border-b pb-2">Order Summary</h2>
@@ -131,22 +136,28 @@ const CartPage = () => {
             <div className="space-y-3 mb-6 text-text-color">
               <div className="flex justify-between">
                 <span>Subtotal ({cartItems.length} items)</span>
-                <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                <span className="font-semibold">{formatCurrency(subtotal)}</span> {/* <-- RUPEE FORMAT APPLIED */}
               </div>
               <div className="flex justify-between">
                 <span>Shipping Estimate</span>
-                <span className="font-semibold">${shipping.toFixed(2)}</span>
+                <span className="font-semibold">{formatCurrency(shipping)}</span> {/* <-- RUPEE FORMAT APPLIED */}
               </div>
               <div className="flex justify-between text-xl font-bold pt-4 border-t border-gray-200 text-primary-color">
                 <span>Order Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>{formatCurrency(total)}</span> {/* <-- RUPEE FORMAT APPLIED */}
               </div>
             </div>
 
-            <button className="w-full bg-secondary-color text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition-colors">
+            {/* CHECKOUT BUTTON - NOW TRIGGERS CALL */}
+            <button 
+              onClick={handleProceedToCheckout}
+              className="w-full bg-secondary-color text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition-colors"
+            >
               Proceed to Checkout
             </button>
-            <p className="text-center text-sm text-gray-500 mt-3">Taxes calculated at checkout.</p>
+            <p className="text-center text-sm text-gray-500 mt-3">
+              Clicking 'Proceed to Checkout' will call a representative.
+            </p>
           </div>
         </div>
       </div>
