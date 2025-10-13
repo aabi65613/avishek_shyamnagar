@@ -1,7 +1,5 @@
-// src/app/counter.ts - FINAL BUILD FIX
-import { headers } from 'next/headers'; 
+// src/app/counter.ts - FINAL FIX: Removed unused 'headers' import
 
 export async function getCount() {
-  // Removed unused variable: const headersList = headers();
   return 1000; 
 }
