@@ -1,13 +1,22 @@
-// src/app/cart/page.tsx - Updated Checkout Logic & Rupee Currency
+// src/app/cart/page.tsx - FINAL, CLEANED FIX
 "use client";
 
-import React, { useCallback } from 'react'; // useCallback is used for the checkout function
+import React, { useCallback } from 'react'; 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, XCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-import { formatCurrency } from '@/utils/format'; // <-- NEW IMPORT
-// import { motion, AnimatePresence } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
+// import { motion, AnimatePresence } from 'framer-motion'; 
+
+// Currency formatter defined INLINE (FIXED the Module not found error)
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+  }).format(amount);
+};
+
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -18,14 +27,13 @@ const CartPage = () => {
     0
   );
 
-  const shipping = subtotal > 0 ? 5.0 : 0.0;
+  const shipping = subtotal > 0 ? 50.0 : 0.0; // ₹50 shipping
   const total = subtotal + shipping;
 
   // --- PROCEED TO CHECKOUT LOGIC: CALL NUMBER ---
-  // Replaces the standard checkout process with a direct call to your number
   const handleProceedToCheckout = useCallback(() => {
-    // NOTE: Replace '91XXXXXXXXXX' with your actual phone number (including +91 if needed)
-    const phoneNumber = '91XXXXXXXXXX'; 
+    // NOTE: Replace '91XXXXXXXXXX' with your actual phone number 
+    const phoneNumber = '7059068366'; 
     window.location.href = `tel:+${phoneNumber}`;
   }, []);
   // --- END CHECKOUT LOGIC ---
@@ -114,7 +122,7 @@ const CartPage = () => {
                 {/* Price & Remove - NOW RUPEES */}
                 <div className="flex flex-col items-end min-w-[100px]">
                   <span className="text-lg font-bold text-primary-color mb-1">
-                    {formatCurrency(item.price * item.quantity)} {/* <-- RUPEE FORMAT APPLIED */}
+                    {formatCurrency(item.price * item.quantity)}
                   </span>
                   <button
                     onClick={() => removeFromCart(item.id)}
@@ -136,15 +144,15 @@ const CartPage = () => {
             <div className="space-y-3 mb-6 text-text-color">
               <div className="flex justify-between">
                 <span>Subtotal ({cartItems.length} items)</span>
-                <span className="font-semibold">{formatCurrency(subtotal)}</span> {/* <-- RUPEE FORMAT APPLIED */}
+                <span className="font-semibold">{formatCurrency(subtotal)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping Estimate</span>
-                <span className="font-semibold">{formatCurrency(shipping)}</span> {/* <-- RUPEE FORMAT APPLIED */}
+                <span className="font-semibold">{formatCurrency(shipping)}</span>
               </div>
               <div className="flex justify-between text-xl font-bold pt-4 border-t border-gray-200 text-primary-color">
                 <span>Order Total</span>
-                <span>{formatCurrency(total)}</span> {/* <-- RUPEE FORMAT APPLIED */}
+                <span>{formatCurrency(total)}</span>
               </div>
             </div>
 
@@ -156,7 +164,7 @@ const CartPage = () => {
               Proceed to Checkout
             </button>
             <p className="text-center text-sm text-gray-500 mt-3">
-              Clicking 'Proceed to Checkout' will call a representative.
+              Clicking &apos;Proceed to Checkout&apos; will call a representative.
             </p>
           </div>
         </div>
