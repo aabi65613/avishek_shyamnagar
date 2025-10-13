@@ -1,89 +1,99 @@
 // src/components/Footer.tsx
-"use client"; // Required for motion
-
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail } from 'lucide-react'; // Added Mail icon for completeness
-import { motion } from 'framer-motion'; // For subtle animation
+// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const phoneNumber = "7059068366";
-  const email = "contact@books.shyamnagar.com"; // Placeholder Email
 
-  // Animation for the footer links
-  const linkVariants = {
-    hover: { 
-      scale: 1.05, 
-      color: 'var(--secondary-color)', // Gold color on hover
-      transition: { duration: 0.1 } 
-    },
-    rest: { 
-      scale: 1, 
-      color: 'var(--text-color)', // Default text color
-    }
-  };
-
+  // Replaced motion.footer with standard <footer>
   return (
-    <footer className="bg-primary-color text-white py-10 mt-16 shadow-inner">
+    <footer className="w-full bg-primary-color text-white py-10 mt-12">
       <div className="container mx-auto px-4">
-        {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-secondary-color/50 pb-8 mb-8">
           
-          {/* Column 1: Brand & Description */}
+          {/* Column 1: Brand Info */}
           <div>
-            <h3 className="text-2xl font-extrabold mb-3 tracking-wider text-secondary-color">
-              BOOKS.shyamnagar
-            </h3>
+            <h3 className="text-xl font-bold text-secondary-color mb-4">Books.shyamnagar</h3>
             <p className="text-sm text-gray-300">
-              Discount beyond your expectations. Your destination for books, tools, and unique gifts.
+              Discount beyond your expectations. Quality products delivered fast.
             </p>
           </div>
-
+          
           {/* Column 2: Quick Links */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-lg font-semibold mb-3 border-b border-secondary-color pb-1">Quick Links</h4>
-            <div className="flex flex-col space-y-2 text-sm">
-              <Link href="/">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Home</motion.a>
-              </Link>
-              <Link href="/#categories">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Categories</motion.a>
-              </Link>
-              <Link href="/cart">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">View Cart</motion.a>
-              </Link>
-              <Link href="/contact">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Contact</motion.a>
-              </Link>
-            </div>
+          <div>
+            <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Quick Links</h4>
+            <ul className="space-y-2">
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/about" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/contact" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  Contact
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          {/* Column 3: Contact Info */}
-          <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-lg font-semibold mb-3 border-b border-secondary-color pb-1">Get in Touch</h4>
-            <div className="flex flex-col space-y-2 text-sm">
-              {/* Phone Number */}
-              <a href={`tel:${phoneNumber}`} className="flex items-center space-x-2 hover:text-secondary-color transition-colors">
-                <Phone size={16} className="text-secondary-color" />
-                <span>{phoneNumber}</span>
+          {/* Column 3: Customer Service */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Service</h4>
+            <ul className="space-y-2">
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/faq" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/shipping" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  Shipping & Returns
+                </Link>
+              </li>
+              <li>
+                {/* Replaced motion.a with standard <Link> */}
+                <Link href="/terms" className="text-gray-300 hover:text-secondary-color transition-colors">
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Social Media */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 border-b border-secondary-color/50 pb-1">Connect</h4>
+            <div className="flex space-x-4">
+              {/* Replaced motion.a with standard <a> */}
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
+                <Facebook size={20} />
               </a>
-              {/* Email (Placeholder) */}
-              <a href={`mailto:${email}`} className="flex items-center space-x-2 hover:text-secondary-color transition-colors">
-                <Mail size={16} className="text-secondary-color" />
-                <span>{email}</span>
+              {/* Replaced motion.a with standard <a> */}
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
+                <Instagram size={20} />
               </a>
-              <p className="pt-2 text-gray-400">Kolkata, West Bengal, India</p>
+              {/* Replaced motion.a with standard <a> */}
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary-color transition-colors">
+                <Twitter size={20} />
+              </a>
             </div>
           </div>
         </div>
         
-        {/* Copyright Section */}
-        <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
-          <p>&copy; {currentYear} Books.shyamnagar. All rights reserved.</p>
-          <div className="mt-2 text-xs">
-            <p>Designed and Built by Manus AI</p>
-          </div>
+        {/* Copyright */}
+        <div className="text-center text-sm text-gray-400">
+          &copy; {currentYear} Books.shyamnagar. All rights reserved.
         </div>
       </div>
     </footer>
