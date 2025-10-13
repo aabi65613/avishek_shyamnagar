@@ -1,4 +1,5 @@
-// src/components/ProductCard.tsx - FINAL FIX: Removed 'index' from destructuring
+// src/components/ProductCard.tsx - FINAL FIX: Make 'index' optional
+
 "use client";
 
 import React from 'react';
@@ -9,7 +10,9 @@ import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
   product: Product;
-  index: number; 
+  // CRITICAL FIX: Make index optional (with '?') to satisfy other components 
+  // that don't pass it (like FeaturedProductsSlider.tsx).
+  index?: number; 
 }
 
 // Currency formatter defined INLINE (KEEPS RUPEE LOGIC)
@@ -21,7 +24,7 @@ const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
-// FIX: Only destructure 'product' to fix the unused 'index' error.
+// Destructure only product, as index is not used in this component
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
 
