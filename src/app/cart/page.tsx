@@ -1,152 +1,126 @@
 // src/app/cart/page.tsx
 "use client";
 
-import React, { useState } from 'react';
-import { useCart } from '@/context/CartContext';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Trash2, Plus, Minus } from 'lucide-react';
+import { Trash2, XCircle } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+// import { motion, AnimatePresence } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
 
 const CartPage = () => {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, clearCart, getItemCount } = useCart();
-  const [orderPlaced, setOrderPlaced] = useState(false);
-  const [homeDelivery, setHomeDelivery] = useState(true); // Default to Home Delivery
+  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
 
-  const handlePlaceOrder = () => {
-    // Simulate placing order (no actual backend integration)
-    console.log("Order placed with Pay on Delivery. Delivery Method:", homeDelivery ? "Home Delivery" : "Store Pickup");
-    // You could potentially send this data somewhere or just show a confirmation
-    setOrderPlaced(true);
-    clearCart(); // Clear the cart after placing the order
-  };
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
-  // If order is placed, show confirmation message
-  if (orderPlaced) {
-    return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold text-green-600 mb-4">Order Placed Successfully!</h1>
-        <p className="text-lg text-gray-700 mb-6">Thank you for your purchase. Your order will be processed shortly.</p>
-        <p className="text-md text-gray-600 mb-8">Payment Method: Pay on Delivery</p>
-        <p className="text-md text-gray-600 mb-8">Delivery Method: {homeDelivery ? "Home Delivery" : "Store Pickup"}</p>
-        <Link href="/" className="bg-primary-color text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-colors">
-          Continue Shopping
-        </Link>
-      </div>
-    );
-  }
+  const shipping = subtotal > 0 ? 5.0 : 0.0;
+  const total = subtotal + shipping;
 
-  // If cart is empty, show message
+  // No motion or variants needed for now
+  // const itemVariants = {
+  //   hidden: { opacity: 0, x: -50 },
+  //   visible: { opacity: 1, x: 0 },
+  //   exit: { opacity: 0, x: 50, transition: { duration: 0.2 } },
+  // };
+
   if (cartItems.length === 0) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Your Cart is Empty</h1>
-        <p className="text-lg text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
-        <Link href="/" className="bg-primary-color text-white px-6 py-2 rounded-md hover:bg-opacity-90 transition-colors">
+      <div className="container mx-auto px-4 py-20 text-center flex flex-col items-center min-h-[60vh]">
+        <XCircle size={64} className="text-secondary-color mb-4" />
+        <h1 className="text-3xl font-bold text-primary-color mb-3">Your Cart is Empty</h1>
+        <p className="text-lg text-gray-600 mb-6">Looks like you haven&apos;t added anything to your cart yet.</p>
+        <Link 
+          href="/" 
+          className="bg-secondary-color text-white px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-colors"
+        >
           Start Shopping
         </Link>
       </div>
     );
   }
 
-  // Display cart items and summary
   return (
-    <div className="container mx-auto px-4 py-8 md:py-12">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Your Shopping Cart</h1>
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Cart Items List */}
-        <div className="lg:w-2/3">
-          <div className="space-y-4">
-            {cartItems.map((item) => (
-              <div key={item.id} className="flex items-center border rounded-lg p-4 shadow-sm bg-white">
-                <div className="relative w-20 h-20 mr-4 flex-shrink-0">
-                  <Image
-                    src={item.imageUrl || 
-'/placeholder-product.png'}
-                    alt={item.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded"
-                    onError={(e) => { e.currentTarget.src = 
-'/placeholder-product.png'; }}
-                  />
-                </div>
-                <div className="flex-grow">
-                  <h2 className="text-lg font-semibold text-gray-800">{item.title}</h2>
-                  <p className="text-sm text-gray-500">${item.price.toFixed(2)}</p>
-                  <div className="flex items-center mt-2">
-                    <button
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="text-gray-500 hover:text-red-600 p-1 border rounded-l"
-                      aria-label="Decrease quantity"
-                    >
-                      <Minus size={16} />
-                    </button>
-                    <span className="px-3 py-1 border-t border-b">{item.quantity}</span>
-                    <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="text-gray-500 hover:text-green-600 p-1 border rounded-r"
-                      aria-label="Increase quantity"
-                    >
-                      <Plus size={16} />
-                    </button>
-                  </div>
-                </div>
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  className="text-gray-400 hover:text-red-600 ml-4"
-                  aria-label="Remove item"
-                >
-                  <Trash2 size={20} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="container mx-auto px-4 py-10">
+      <h1 className="text-4xl font-extrabold text-primary-color mb-8 border-b-2 border-secondary-color pb-2">
+        Your Shopping Cart
+      </h1>
 
-        {/* Cart Summary & Checkout */}
-        <div className="lg:w-1/3">
-          <div className="border rounded-lg p-6 shadow-sm bg-white sticky top-24">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Order Summary</h2>
-            <div className="flex justify-between mb-2 text-gray-600">
-              <span>Subtotal ({getItemCount()} items)</span>
-              <span>${getCartTotal().toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between mb-4 text-gray-600">
-              <span>Shipping</span>
-              <span>Free</span> {/* Assuming free shipping for now */}
-            </div>
-            <div className="flex justify-between font-bold text-lg text-gray-800 mb-6 pt-2 border-t">
-              <span>Total</span>
-              <span>${getCartTotal().toFixed(2)}</span>
-            </div>
-
-            {/* Delivery Option */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Delivery Option</label>
-              <select
-                value={homeDelivery ? 'home' : 'pickup'}
-                onChange={(e) => setHomeDelivery(e.target.value === 'home')}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-color focus:border-primary-color"
-              >
-                <option value="home">Home Delivery</option>
-                {/* <option value="pickup">Store Pickup</option> */}
-                 {/* Only Home Delivery option as requested? If Store Pickup needed, uncomment above */}
-              </select>
-            </div>
-
-            {/* Pay on Delivery Button */}
-            <button
-              onClick={handlePlaceOrder}
-              className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors font-semibold"
+      <div className="flex flex-col lg:flex-row gap-10">
+        
+        {/* Cart Items List - Takes up the main space */}
+        <div className="lg:w-3/5 space-y-6">
+          <div className="flex justify-between items-center pb-2 border-b">
+            <h2 className="text-xl font-semibold text-text-color">Items ({cartItems.length})</h2>
+            <button 
+              onClick={clearCart} 
+              className="flex items-center space-x-1 text-sm text-gray-500 hover:text-red-600 transition-colors"
             >
-              Place Order (Pay on Delivery)
+              <Trash2 size={16} />
+              <span>Clear Cart</span>
             </button>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
-export default CartPage;
+          {/* Replaced <AnimatePresence> with JSX comment */}
+          {/* <AnimatePresence initial={false}> */}
+            {cartItems.map((item) => (
+              // Replaced <motion.div> with standard <div>
+              <div 
+                key={item.id} 
+                // variants={itemVariants} 
+                // initial="hidden" 
+                // animate="visible" 
+                // exit="exit"
+                className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                {/* Image */}
+                <div className="relative w-20 h-20 flex-shrink-0 mr-4">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    className="rounded-lg"
+                    sizes="80px"
+                    onError={(e) => { e.currentTarget.src = "/placeholder-product.png"; }}
+                  />
+                </div>
+                
+                {/* Details */}
+                <div className="flex-grow">
+                  <Link href={`/products/${item.id}`} className="text-lg font-semibold text-text-color hover:text-primary-color transition-colors truncate block">
+                    {item.title}
+                  </Link>
+                  <p className="text-sm text-gray-500 capitalize">{item.category}</p>
+                </div>
 
+                {/* Quantity Controls */}
+                <div className="flex items-center space-x-2 mx-4">
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    disabled={item.quantity <= 1}
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:opacity-50 transition-colors"
+                  >
+                    -
+                  </button>
+                  <span className="w-8 text-center font-medium text-text-color">{item.quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-secondary-color text-white hover:bg-primary-color transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* Price & Remove */}
+                <div className="flex flex-col items-end min-w-[100px]">
+                  <span className="text-lg font-bold text-primary-color mb-1">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </span>
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-sm text-gray-500 hover:text-red-600 transition-colors flex items-center space-x-1"
+                  >
+                    <Trash
