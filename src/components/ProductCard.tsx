@@ -1,4 +1,4 @@
-// src/components/ProductCard.tsx - FINAL, CLEANED FIX
+// src/components/ProductCard.tsx - FINAL CURRENCY & BUILD FIX
 "use client";
 
 import React from 'react';
@@ -22,7 +22,8 @@ const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
+// Renamed index to _index to silence the unused variable warning
+const ProductCard: React.FC<ProductCardProps> = ({ product, index: _index }) => {
   const { addToCart } = useCart();
 
   return (
