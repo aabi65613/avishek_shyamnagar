@@ -57,10 +57,9 @@ const Footer = () => {
               <a href="https://instagram.com" aria-label="Instagram" className="hover:text-primary-color transition-colors"><Instagram size={20} /></a>
             </div>
             
-            {/* NEW: Phone Number Link */}
+            {/* Phone number hardcoded: +91 7059068366 */}
             <div className="flex items-center space-x-2 text-sm">
               <Phone size={16} className="text-primary-color" />
-              {/* Phone number hardcoded: +91 7059068366 */}
               <a href="tel:+917059068366" className="hover:text-primary-color transition-colors font-semibold">
                 +91 7059068366
               </a>
