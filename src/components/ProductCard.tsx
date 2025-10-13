@@ -13,7 +13,7 @@ interface ProductCardProps {
   index: number; 
 }
 
-// Currency formatter defined INLINE (to avoid import errors)
+// Currency formatter defined INLINE (to avoid import errors) - KEEPS RUPEE LOGIC
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -22,7 +22,7 @@ const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
-// Renamed index to _index to silence the unused variable warning
+// Destructure as { product, index: _index } to silence the unused warning
 const ProductCard: React.FC<ProductCardProps> = ({ product, index: _index }) => {
   const { addToCart } = useCart();
 
