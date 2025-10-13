@@ -1,4 +1,4 @@
-// src/components/ProductCard.tsx - Updated for Rupee (₹) Currency
+// src/components/ProductCard.tsx - FINAL, CLEANED FIX
 "use client";
 
 import React from 'react';
@@ -6,18 +6,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-import { formatCurrency } from '@/utils/format'; // <-- NEW IMPORT
-// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
+// import { motion } from 'framer-motion'; 
 
 interface ProductCardProps {
   product: Product;
   index: number; 
 }
 
+// Currency formatter defined INLINE (FIXED the Module not found error)
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 2,
+  }).format(amount);
+};
+
 const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
-  // The outer div is clean
   return (
     <div
       className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
@@ -50,7 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
 
         {/* Price using primary color - NOW RUPEES */}
         <div className="text-xl font-bold text-primary-color mb-3 mt-auto">
-          {formatCurrency(product.price)} {/* <-- RUPEE FORMAT APPLIED */}
+          {formatCurrency(product.price)}
         </div>
 
         {/* Add to Cart Button (Animated) */}
