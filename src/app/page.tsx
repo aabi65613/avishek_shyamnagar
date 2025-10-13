@@ -1,4 +1,4 @@
-// src/app/page.tsx - FINAL VISUAL FIX
+// src/app/page.tsx - FINAL VISUAL & BUILD FIX
 "use client";
 
 import React from 'react';
@@ -8,7 +8,7 @@ import { demoProducts, getCategories } from '@/data/products';
 
 const HomePage = () => {
   const products = demoProducts.slice(0, 9); 
-  const categories = getCategories();
+  // const categories = getCategories(); // COMMENTED OUT: Unused variable fix
 
   const featuredProducts = products.filter(p => p.id <= 9); 
 
