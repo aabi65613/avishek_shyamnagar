@@ -1,14 +1,12 @@
-// src/hooks/use-toast.ts - FINAL BUILD FIX
+// src/hooks/use-toast.ts - FINAL FIX: Removed unused exports and variables
 
 import * as React from "react";
 
-import { ToastActionElement, ToastProps } from "@/components/ui/toast";
+// FIX 1: Removed unused 'ToastActionElement' from import
+import { ToastProps } from "@/components/ui/toast";
 
 const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000; // Increased delay to keep toast visible
-
-// Commented out unused type definition to fix build error
-// type actionTypes = "ADD_TOAST" | "UPDATE_TOAST" | "DISMISS_TOAST" | "REMOVE_TOAST"
+// FIX 2: Removed unused constant 'TOAST_REMOVE_DELAY'
 
 type State = {
   toasts: ToastProps[];
