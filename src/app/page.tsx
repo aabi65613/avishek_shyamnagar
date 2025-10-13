@@ -1,56 +1,58 @@
-// src/app/page.tsx
+// src/app/page.tsx - FINAL VISUAL FIX
+"use client";
+
 import React from 'react';
-import { demoProducts } from '@/data/products'; // Correctly import your product data
-import ProductCard from '@/components/ProductCard'; // <-- This is the animated card
-import { getCategories } from '@/data/products'; // Function to get unique categories
+import ProductCard from '@/components/ProductCard';
+import { demoProducts, getCategories } from '@/data/products'; 
+// import { motion } from 'framer-motion'; // COMMENTED OUT: Build Fix
 
 const HomePage = () => {
+  const products = demoProducts.slice(0, 9); // Display the first 9 products
   const categories = getCategories();
 
+  // Filter products by the first 9 available, if categories are not yet implemented fully
+  const featuredProducts = products.filter(p => p.id <= 9); 
+
   return (
-    <div className="container mx-auto px-4 py-10 sm:py-16">
-      {/* Hero Section - Clean and Professional */}
-      <section className="text-center mb-12 bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary-color">
-        <h1 className="text-5xl font-extrabold text-primary-color mb-4">
-          Discover Our Premium Collection
-        </h1>
-        <p className="text-xl text-gray-600">
-          Discount beyond your expectations. Shop the latest styles.
-        </p>
+    <div className="min-h-screen">
+      
+      {/* NEW: Hero Section with Brand Colors
+        The background is now Deep Navy (var(--background-color)) 
+        Text uses Gold (var(--primary-color) and var(--secondary-color))
+      */}
+      <section className="text-center py-24 px-4 bg-background-color text-white shadow-lg">
+        <div className="container mx-auto">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-primary-color mb-4 leading-tight">
+            Discover Our Premium Collection
+          </h1>
+          <p className="text-xl md:text-2xl text-secondary-color mb-8 max-w-3xl mx-auto">
+            Discount beyond your expectations. Shop the latest styles and quality products delivered fast.
+          </p>
+          <a
+            href="#featured"
+            className="inline-block bg-accent-color text-text-color px-8 py-3 rounded-full font-bold text-lg transition-transform duration-300 hover:scale-105 hover:bg-opacity-90 shadow-md"
+          >
+            Shop Now
+          </a>
+        </div>
       </section>
 
-      {/* Main Product Grid - The Animated Display */}
-      <section>
-        <h2 className="text-3xl font-bold text-primary-color mb-8 border-b-2 border-secondary-color pb-2 inline-block">
-          Featured Products
-        </h2>
-        
-        {/* This grid applies the staggered fade-in animation */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {demoProducts.map((product, index) => (
-            // Passing index is CRUCIAL for the staggered fade-in effect
+      {/* Main Product Display Section */}
+      <section id="featured" className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold text-text-color border-b-2 border-primary-color inline-block pb-1">
+            Featured Products
+          </h2>
+        </div>
+
+        {/* This grid structure applies to all products */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          {featuredProducts.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </section>
       
-      {/* Category List */}
-      <section className="mt-16" id="categories">
-        <h2 className="text-2xl font-semibold text-primary-color mb-4">
-          Browse Categories
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          {categories.map((category) => (
-            <span 
-              key={category}
-              // Using the Deep Navy and Gold colors for category tags
-              className="px-4 py-1.5 bg-primary-color text-white rounded-full text-sm font-medium hover:bg-secondary-color transition-colors cursor-pointer"
-            >
-              {category}
-            </span>
-          ))}
-        </div>
-      </section>
     </div>
   );
 };
