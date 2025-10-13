@@ -1,4 +1,4 @@
-// src/app/cart/page.tsx
+// src/app/cart/page.tsx - CLEAN VERSION
 "use client";
 
 import React from 'react';
@@ -19,12 +19,7 @@ const CartPage = () => {
   const shipping = subtotal > 0 ? 5.0 : 0.0;
   const total = subtotal + shipping;
 
-  // No motion or variants needed for now
-  // const itemVariants = {
-  //   hidden: { opacity: 0, x: -50 },
-  //   visible: { opacity: 1, x: 0 },
-  //   exit: { opacity: 0, x: 50, transition: { duration: 0.2 } },
-  // };
+  // The itemVariants object is also temporarily removed for a clean build
 
   if (cartItems.length === 0) {
     return (
@@ -63,16 +58,12 @@ const CartPage = () => {
             </button>
           </div>
 
-          {/* Replaced <AnimatePresence> with JSX comment */}
+          {/* AnimatePresence and motion.div are commented out */}
           {/* <AnimatePresence initial={false}> */}
             {cartItems.map((item) => (
               // Replaced <motion.div> with standard <div>
               <div 
                 key={item.id} 
-                // variants={itemVariants} 
-                // initial="hidden" 
-                // animate="visible" 
-                // exit="exit"
                 className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
               >
                 {/* Image */}
@@ -123,4 +114,44 @@ const CartPage = () => {
                     onClick={() => removeFromCart(item.id)}
                     className="text-sm text-gray-500 hover:text-red-600 transition-colors flex items-center space-x-1"
                   >
-                    <Trash
+                    <Trash2 size={16} />
+                    <span>Remove</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          {/* </AnimatePresence> */}
+        </div>
+        
+        {/* Order Summary - Fixed size */}
+        <div className="lg:w-2/5 sticky top-20">
+          <div className="bg-white p-6 rounded-lg shadow-xl border-t-4 border-secondary-color">
+            <h2 className="text-2xl font-bold text-primary-color mb-6 border-b pb-2">Order Summary</h2>
+            
+            <div className="space-y-3 mb-6 text-text-color">
+              <div className="flex justify-between">
+                <span>Subtotal ({cartItems.length} items)</span>
+                <span className="font-semibold">${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Shipping Estimate</span>
+                <span className="font-semibold">${shipping.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-xl font-bold pt-4 border-t border-gray-200 text-primary-color">
+                <span>Order Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <button className="w-full bg-secondary-color text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition-colors">
+              Proceed to Checkout
+            </button>
+            <p className="text-center text-sm text-gray-500 mt-3">Taxes calculated at checkout.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CartPage;
