@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, XCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
-// import { motion, AnimatePresence } from 'framer-motion'; 
 
 // Currency formatter defined INLINE (to avoid import errors)
 const formatCurrency = (amount: number): string => {
@@ -32,7 +31,7 @@ const CartPage = () => {
 
   // --- PROCEED TO CHECKOUT LOGIC: CALL NUMBER ---
   const handleProceedToCheckout = useCallback(() => {
-    // NOTE: Phone number updated to 7059068366
+    // Phone number updated to 7059068366
     const phoneNumber = '917059068366'; 
     window.location.href = `tel:+${phoneNumber}`;
   }, []);
