@@ -1,4 +1,4 @@
-// src/components/ProductCard.tsx
+// src/components/ProductCard.tsx - Updated for Rupee (₹) Currency
 "use client";
 
 import React from 'react';
@@ -6,7 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-// import { motion } from 'framer-motion'; // <-- RE-COMMENTED OUT: Build Fix
+import { formatCurrency } from '@/utils/format'; // <-- NEW IMPORT
+// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
 
 interface ProductCardProps {
   product: Product;
@@ -16,7 +17,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
-  // Replaced motion.div with standard <div> and removed motion props (variants, initial, etc.)
+  // The outer div is clean
   return (
     <div
       className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
@@ -30,7 +31,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           className="transition-opacity duration-500 hover:opacity-90"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           onError={(e) => {
-             // Fallback for missing images
              e.currentTarget.src = "/placeholder-product.png";
              e.currentTarget.style.objectFit = 'contain';
           }}
@@ -48,9 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           </Link>
         </h3>
 
-        {/* Price using primary color */}
+        {/* Price using primary color - NOW RUPEES */}
         <div className="text-xl font-bold text-primary-color mb-3 mt-auto">
-          ${product.price.toFixed(2)}
+          {formatCurrency(product.price)} {/* <-- RUPEE FORMAT APPLIED */}
         </div>
 
         {/* Add to Cart Button (Animated) */}
