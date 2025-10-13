@@ -13,7 +13,7 @@ interface ProductCardProps {
   index: number; 
 }
 
-// Currency formatter defined INLINE (FIXED the Module not found error)
+// Currency formatter defined INLINE (to avoid import errors)
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
