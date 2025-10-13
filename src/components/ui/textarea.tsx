@@ -1,22 +1,36 @@
-import * as React from "react"
+// src/components/ui/toaster.tsx - FINAL FIX: Correcting the circular import path
 
-import { cn } from "@/lib/utils"
+"use client";
 
-const Textarea = React.forwardRef<
-  HTMLTextAreaElement,
-  React.ComponentProps<"textarea">
->(({ className, ...props }, ref) => {
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+} from "./toast"; // <-- CRITICAL FIX: Use relative path to break the loop
+
+import { useToast } from "@/hooks/use-toast";
+
+export function Toaster() {
+  const { toasts } = useToast();
+
   return (
-    <textarea
-      className={cn(
-        "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        className
-      )}
-      ref={ref}
-      {...props}
-    />
-  )
-})
-Textarea.displayName = "Textarea"
-
-export { Textarea }
+    <ToastProvider>
+      {toasts.map(function ({ id, title, description, action, ...props }) {
+        return (
+          <Toast key={id} {...props}>
+            <div className="grid gap-1">
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && (
+                <ToastDescription>{description}</ToastDescription>
+              )}
+            </div>
+            {action}
+            <ToastClose />
+          </Toast>
+        );
+      })}
+    </ToastProvider>
+  );
+}
