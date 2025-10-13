@@ -20,9 +20,7 @@ const config = {
       },
     },
     extend: {
-      // ----------------------------------------------------
       // CRITICAL: MAP CUSTOM CSS VARIABLES TO TAILWIND COLORS
-      // ----------------------------------------------------
       colors: {
         'primary-color': 'var(--primary-color)',
         'secondary-color': 'var(--secondary-color)',
@@ -30,7 +28,6 @@ const config = {
         'text-color': 'var(--text-color)',
         'background-color': 'var(--background-color)',
       },
-      // ----------------------------------------------------
       
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
