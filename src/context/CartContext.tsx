@@ -56,7 +56,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const removeFromCart = (productId: number) => {
     setCartItems(currentItems => {
-      const _itemToRemove = currentItems.find(item => item.id === productId); // FIXED: itemToRemove is now _itemToRemove
+      // Removed the unused variable assignment: const _itemToRemove = ...
       return currentItems.filter(item => item.id !== productId);
     });
   };
