@@ -2,18 +2,13 @@
 
 "use client";
 
-// FIX: Change the import path to import the components directly from the
-// original file they were defined in, or remove the local import entirely
-// as it often causes the circular dependency. 
-// We rely on the components being exported correctly in toast.tsx.
-
 import {
   Toast,
   ToastClose,
   ToastDescription,
   ToastProvider,
   ToastTitle,
-} from "./toast"; // <-- CRITICAL: Changed from "@/components/ui/toast" to "./toast"
+} from "./toast"; // <-- CRITICAL FIX: Use relative path to break the loop
 
 import { useToast } from "@/hooks/use-toast";
 
