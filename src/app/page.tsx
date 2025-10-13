@@ -3,12 +3,13 @@
 
 import React from 'react';
 import ProductCard from '@/components/ProductCard';
-import { demoProducts, getCategories } from '@/data/products'; 
+// Removed unused import 'getCategories'
+import { demoProducts } from '@/data/products'; 
 // import { motion } from 'framer-motion'; 
 
 const HomePage = () => {
   const products = demoProducts.slice(0, 9); 
-  // const categories = getCategories(); // COMMENTED OUT: Unused variable fix
+  // const categories = getCategories(); // Variable no longer defined
 
   const featuredProducts = products.filter(p => p.id <= 9); 
 
