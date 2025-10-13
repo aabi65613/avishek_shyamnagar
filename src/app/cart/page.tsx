@@ -1,4 +1,4 @@
-// src/app/cart/page.tsx - FINAL, CLEANED FIX
+// src/app/cart/page.tsx - FINAL, CLEANED FIX (Phone: 7059068366)
 "use client";
 
 import React, { useCallback } from 'react'; 
@@ -8,7 +8,7 @@ import { Trash2, XCircle } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 // import { motion, AnimatePresence } from 'framer-motion'; 
 
-// Currency formatter defined INLINE (FIXED the Module not found error)
+// Currency formatter defined INLINE (to avoid import errors)
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
@@ -32,8 +32,8 @@ const CartPage = () => {
 
   // --- PROCEED TO CHECKOUT LOGIC: CALL NUMBER ---
   const handleProceedToCheckout = useCallback(() => {
-    // NOTE: Replace '91XXXXXXXXXX' with your actual phone number 
-    const phoneNumber = '7059068366'; 
+    // NOTE: Phone number updated to 7059068366
+    const phoneNumber = '917059068366'; 
     window.location.href = `tel:+${phoneNumber}`;
   }, []);
   // --- END CHECKOUT LOGIC ---
