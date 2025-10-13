@@ -2,15 +2,13 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-  // We specify where Tailwind should look for files using its classes
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}", // Ensure all src subdirectories are covered
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
-  // The dark mode setting allows toggling themes
   darkMode: "class",
   
   theme: {
@@ -23,10 +21,9 @@ const config = {
     },
     extend: {
       // ----------------------------------------------------
-      // THIS IS THE CRITICAL SECTION FOR CUSTOM COLORS
+      // CRITICAL: MAP CUSTOM CSS VARIABLES TO TAILWIND COLORS
       // ----------------------------------------------------
       colors: {
-        // Map classes like 'text-primary-color' to the variable in globals.css
         'primary-color': 'var(--primary-color)',
         'secondary-color': 'var(--secondary-color)',
         'accent-color': 'var(--accent-color)',
@@ -35,7 +32,6 @@ const config = {
       },
       // ----------------------------------------------------
       
-      // Keep any other custom styles you might have
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
