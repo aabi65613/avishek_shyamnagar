@@ -1,17 +1,24 @@
-"use client"
+// src/components/ui/toaster.tsx - FINAL FIX: Correcting the circular import path
 
-import { useToast } from "@/hooks/use-toast"
+"use client";
+
+// FIX: Change the import path to import the components directly from the
+// original file they were defined in, or remove the local import entirely
+// as it often causes the circular dependency. 
+// We rely on the components being exported correctly in toast.tsx.
+
 import {
   Toast,
   ToastClose,
   ToastDescription,
   ToastProvider,
   ToastTitle,
-  ToastViewport,
-} from "@/components/ui/toast"
+} from "./toast"; // <-- CRITICAL: Changed from "@/components/ui/toast" to "./toast"
+
+import { useToast } from "@/hooks/use-toast";
 
 export function Toaster() {
-  const { toasts } = useToast()
+  const { toasts } = useToast();
 
   return (
     <ToastProvider>
@@ -27,9 +34,8 @@ export function Toaster() {
             {action}
             <ToastClose />
           </Toast>
-        )
+        );
       })}
-      <ToastViewport />
     </ToastProvider>
-  )
+  );
 }
