@@ -6,44 +6,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-import { motion } from 'framer-motion'; // <-- FRAMER MOTION FOR PREMIUM ANIMATION
+// import { motion } from 'framer-motion'; // <-- COMMENTED OUT: Build Fix
 
 interface ProductCardProps {
   product: Product;
-  // Index is needed to make the cards appear one after another (staggered effect)
   index: number; 
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
-  // --- PREMIUM ANIMATION LOGIC ---
-  const motionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        duration: 0.5, 
-        delay: index * 0.05, // Staggered delay for a smooth wave effect
-      } 
-    },
-    hover: { 
-      scale: 1.05, // Subtle scale up on hover
-      boxShadow: "0 15px 30px rgba(0,0,0,0.1)", // Shadow for depth
-      transition: { duration: 0.2 } 
-    }
-  };
-  // -------------------------------
-
+  // The motionVariants logic is removed/ignored since we are using a standard <div>
+  
   return (
-    <motion.div
-      variants={motionVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover="hover"
-      // Applied new primary/secondary colors
-      className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100"
+    // Replaced motion.div with standard <div> and removed motion props (variants, initial, etc.)
+    <div
+      className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
     >
       <Link href={`/products/${product.id}`} className="relative block h-56 w-full">
         <Image
@@ -78,16 +56,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
         </div>
 
         {/* Add to Cart Button (Animated) */}
-        <motion.button
+        {/* Replaced motion.button with standard <button> */}
+        <button
           onClick={() => addToCart(product)}
-          // Motion to make the button feel responsive
-          whileTap={{ scale: 0.95 }}
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
         >
           Add to Cart
-        </motion.button>
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
