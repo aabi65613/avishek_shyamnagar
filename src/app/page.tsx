@@ -1,4 +1,4 @@
-// src/app/page.tsx - FINAL CLEAN CODE
+// src/app/page.tsx - FINAL CLEAN CODE WITH REAL IMAGE PATHS
 
 import Link from 'next/link';
 import ProductCard from "@/components/ProductCard";
@@ -12,21 +12,26 @@ interface Product {
     price: number;
 }
 
-// --- Placeholder Data (Replace with your actual data fetching logic) ---
-// This ensures the page compiles without external API calls
+// --- RESTORED PRODUCT DATA WITH YOUR IMAGE FILENAMES ---
+// Assuming these images are placed in your public folder (e.g., /public/1000488519.jpg)
 const DUMMY_PRODUCTS: Product[] = [
-    { id: '1', title: 'The Great Novel', imageUrl: '/placeholder-novel.jpg', category: 'Fiction', price: 799.00 },
-    { id: '2', title: 'Coding Handbook', imageUrl: '/placeholder-code.jpg', category: 'Technology', price: 1250.50 },
-    { id: '3', title: 'Design Principles', imageUrl: '/placeholder-design.jpg', category: 'Art', price: 950.00 },
-    { id: '4', title: 'World Atlas 2024', imageUrl: '/placeholder-map.jpg', category: 'Education', price: 1500.00 },
-    { id: '5', title: 'Cooking Guide', imageUrl: '/placeholder-food.jpg', category: 'Lifestyle', price: 450.00 },
+    // RESTORED IMAGE PATHS:
+    { id: '1', title: 'The Great Novel', imageUrl: '/1000488519.jpg', category: 'Fiction', price: 799.00 },
+    { id: '2', title: 'Coding Handbook', imageUrl: '/1000488528.jpg', category: 'Technology', price: 1250.50 },
+    { id: '3', title: 'Design Principles', imageUrl: '/1000488658.jpg', category: 'Art', price: 950.00 },
+    { id: '4', title: 'World Atlas 2024', imageUrl: '/1000490657.jpg', category: 'Education', price: 1500.00 },
+    { id: '5', title: 'Cooking Guide', imageUrl: '/1000491005.jpg', category: 'Lifestyle', price: 450.00 },
+    
+    // Additional placeholders to fill the grid:
     { id: '6', title: 'Science Fact Book', imageUrl: '/placeholder-science.jpg', category: 'Science', price: 800.00 },
+    { id: '7', title: 'Travel Journal', imageUrl: '/placeholder-travel.jpg', category: 'Lifestyle', price: 550.00 },
+    { id: '8', title: 'Math Problems', imageUrl: '/placeholder-math.jpg', category: 'Education', price: 600.00 },
 ];
 // ----------------------------------------------------------------------
 
 
 export default function Home() {
-    const featuredProducts = DUMMY_PRODUCTS.slice(0, 8); // Display first 8 (if available)
+    const featuredProducts = DUMMY_PRODUCTS.slice(0, 8); 
 
     return (
         <main className="min-h-screen">
@@ -45,10 +50,10 @@ export default function Home() {
                     Featured Products
                 </h2>
                 
-                {/* CRITICAL FIX: Removed index={index} from ProductCard */}
+                {/* FIX: Removed index={index} and confirmed map iteration is clean */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-                    {featuredProducts.map((product) => ( // Removed 'index' from map arguments
-                        <ProductCard key={product.id} product={product} /> // Removed index={index}
+                    {featuredProducts.map((product) => ( 
+                        <ProductCard key={product.id} product={product} /> 
                     ))}
                 </div>
                 
@@ -58,8 +63,6 @@ export default function Home() {
                     </Link>
                 </div>
             </section>
-
-            {/* You can add more sections here */}
 
         </main>
     );
