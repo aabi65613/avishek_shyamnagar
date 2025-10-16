@@ -1,13 +1,15 @@
-// src/components/Footer.tsx - FINAL FIX FOR BUILD CRASH
+// src/components/Footer.tsx - FINAL FIX FOR BUILD CRASH (Added "use client")
+
+"use client"; // <--- CRITICAL FIX: Marks this component as client-side for interactivity
 
 import Link from "next/link";
 import { MoveUp } from "lucide-react";
 
-// CRITICAL FIX: Removed the ": React.FC" type annotation
 const Footer = () => { 
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
+    // This function uses 'window', which requires a client component
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -44,7 +46,8 @@ const Footer = () => {
           </div>
           
           <button
-            onClick={scrollToTop}
+            // This onClick handler requires the component to be marked "use client"
+            onClick={scrollToTop} 
             className="flex items-center justify-center p-3 rounded-full bg-gold text-deep-navy shadow-lg transition-all hover:bg-gold/80"
             aria-label="Scroll to top"
           >
