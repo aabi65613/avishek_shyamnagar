@@ -1,41 +1,26 @@
-// src/components/ui/textarea.tsx - FINAL FIX for Type Error
+// src/components/ui/textarea.tsx - CORRECTING PROJECT STRUCTURE
 
-"use client";
+import * as React from "react"
 
-import {
-  Toast,
-  ToastClose,
-  ToastDescription,
-  ToastProvider,
-  ToastTitle,
-} from "@/components/ui/toast";
-import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils"
 
-export function Toaster() {
-  const { toasts } = useToast();
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-  return (
-    <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
-        return (
-          <Toast key={id} {...props}>
-            <div className="grid gap-1">
-              {title && <ToastTitle>{title}</ToastTitle>}
-              {/* This check makes the code safe: it only renders the description if it exists */}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
-              )}
-            </div>
-            {action}
-            <ToastClose />
-          </Toast>
-        );
-      })}
-    </ToastProvider>
-  );
-}
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <textarea
+        className={cn(
+          "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Textarea.displayName = "Textarea"
 
-// NOTE: It is unusual for this component to be in 'textarea.tsx'.
-// We are naming the export 'Toaster' which is standard.
-// If this file is meant to be a text area, you have pasted the wrong code into it.
-// This fix assumes the goal is to make the toast system work.
+export { Textarea }
