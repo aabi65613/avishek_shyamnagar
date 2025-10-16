@@ -1,4 +1,4 @@
-// src/components/ui/toaster.tsx - FINAL FIX: Correcting the circular import path
+// src/components/ui/toaster.tsx - FIXING IMPORT PATH
 
 "use client";
 
@@ -8,7 +8,7 @@ import {
   ToastDescription,
   ToastProvider,
   ToastTitle,
-} from "./toast"; // <-- CRITICAL FIX: Use relative path to break the loop
+} from "./toast"; // <-- CRITICAL: Uses relative path to read the restored file
 
 import { useToast } from "@/hooks/use-toast";
 
