@@ -1,3 +1,5 @@
+// src/components/ui/toast.tsx - RESTORED DEFINITION FILE
+
 "use client"
 
 import * as React from "react"
