@@ -4,7 +4,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Phone, Mail } from 'lucide-react'; // Added Mail icon for completeness
-import { motion } from 'framer-motion'; // For subtle animation
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
