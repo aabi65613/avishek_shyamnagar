@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 
-// NOTE: This component assumes a Cart Context exists to determine cart item count.
-// Since we don't have the context code, we will use a dummy count.
-const DUMMY_CART_COUNT = 4; // Based on your previous screenshots
+// NOTE: This component uses a dummy count for cart items to avoid relying on a broken context.
+const DUMMY_CART_COUNT = 4; // Placeholder count
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,7 +17,7 @@ const Header = () => {
                 
                 {/* 1. Logo/Site Title (Golden Color Fix) */}
                 <Link href="/" className="text-2xl font-extrabold tracking-tight">
-                    {/* CRITICAL FIX: Changed color class to text-secondary-color (Gold) */}
+                    {/* CRITICAL: Changed color class to text-secondary-color (Gold) */}
                     <span className="text-secondary-color">Books Shyamnagar</span>
                 </Link>
 
