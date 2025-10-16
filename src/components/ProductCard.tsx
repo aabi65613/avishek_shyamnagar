@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-import { motion } from 'framer-motion'; // <-- FRAMER MOTION FOR PREMIUM ANIMATION
 
 interface ProductCardProps {
   product: Product;
