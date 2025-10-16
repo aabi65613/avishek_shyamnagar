@@ -1,4 +1,4 @@
-// src/components/Header.tsx - REMOVED framer-motion
+// src/components/Header.tsx - FINAL FIX FOR BUILD CRASH
 
 "use client";
 
@@ -7,7 +7,8 @@ import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useState } from 'react';
 
-const Header: React.FC = () => {
+// CRITICAL FIX: Removed the ": React.FC" type annotation
+const Header = () => {
   const { cartItems } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
