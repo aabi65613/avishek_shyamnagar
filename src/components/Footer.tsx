@@ -1,77 +1,58 @@
-// src/components/Footer.tsx - FINAL CONTACT FIX (Phone: 7059068366)
-"use client";
+// src/components/Footer.tsx - REMOVED framer-motion
 
-import React from 'react';
-import Link from 'next/link';
-import { Phone, Facebook, Twitter, Instagram } from 'lucide-react'; 
+import Link from "next/link";
+import { MoveUp } from "lucide-react";
 
-const Footer = () => {
+const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    // Footer uses Deep Navy background and light text
-    <footer className="bg-background-color text-gray-300 border-t border-gray-700 mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 border-b border-gray-700 pb-10">
+    <footer className="bg-deep-navy text-gray-300 py-10 border-t border-secondary-color/20">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start space-y-8 md:space-y-0">
           
-          {/* Brand Info */}
-          <div className="col-span-2 md:col-span-1">
-            <h3 className="text-2xl font-bold text-primary-color mb-3">
-              Books.shyamnagar
-            </h3>
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-bold text-gold mb-2">Books Shyamnagar</h3>
             <p className="text-sm">
-              Discount beyond your expectations. Quality products delivered fast.
+              Your source for quality products.<br />
+              Delivering satisfaction with every order.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-secondary-color mb-4 border-b border-secondary-color inline-block pb-1">
-              Quick Links
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/" className="hover:text-primary-color transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-primary-color transition-colors">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-primary-color transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Service */}
-          <div>
-            <h4 className="text-lg font-semibold text-secondary-color mb-4 border-b border-secondary-color inline-block pb-1">
-              Service
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/faq" className="hover:text-primary-color transition-colors">FAQ</Link></li>
-              <li><Link href="/shipping" className="hover:text-primary-color transition-colors">Shipping & Returns</Link></li>
-              <li><Link href="/terms" className="hover:text-primary-color transition-colors">Terms of Service</Link></li>
-            </ul>
-          </div>
-
-          {/* Connect & Phone Number FIX */}
-          <div>
-            <h4 className="text-lg font-semibold text-secondary-color mb-4 border-b border-secondary-color inline-block pb-1">
-              Connect
-            </h4>
-            <div className="flex space-x-4 mb-4">
-              <a href="https://facebook.com" aria-label="Facebook" className="hover:text-primary-color transition-colors"><Facebook size={20} /></a>
-              <a href="https://twitter.com" aria-label="Twitter" className="hover:text-primary-color transition-colors"><Twitter size={20} /></a>
-              <a href="https://instagram.com" aria-label="Instagram" className="hover:text-primary-color transition-colors"><Instagram size={20} /></a>
+          <div className="flex space-x-8">
+            <div className="flex flex-col space-y-2 text-sm">
+              <h4 className="font-semibold text-gold mb-1">Company</h4>
+              <Link href="/about" className="hover:text-gold transition-colors">About Us</Link>
+              <Link href="/contact" className="hover:text-gold transition-colors">Contact</Link>
+              <Link href="/careers" className="hover:text-gold transition-colors">Careers</Link>
             </div>
             
-            {/* Phone number hardcoded: +91 7059068366 */}
-            <div className="flex items-center space-x-2 text-sm">
-              <Phone size={16} className="text-primary-color" />
-              <a href="tel:+917059068366" className="hover:text-primary-color transition-colors font-semibold">
-                +91 7059068366
-              </a>
+            <div className="flex flex-col space-y-2 text-sm">
+              <h4 className="font-semibold text-gold mb-1">Support</h4>
+              <Link href="/faq" className="hover:text-gold transition-colors">FAQ</Link>
+              <Link href="/shipping" className="hover:text-gold transition-colors">Shipping</Link>
+              <Link href="/returns" className="hover:text-gold transition-colors">Returns</Link>
             </div>
-
           </div>
-
+          
+          <button
+            onClick={scrollToTop}
+            className="flex items-center justify-center p-3 rounded-full bg-gold text-deep-navy shadow-lg transition-all hover:bg-gold/80"
+            aria-label="Scroll to top"
+          >
+            <MoveUp className="h-5 w-5" />
+          </button>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center pt-6 text-sm text-gray-500">
-          © 2025 Books.shyamnagar. All rights reserved.
+        <div className="mt-8 pt-6 border-t border-secondary-color/20 text-center text-xs">
+          © {currentYear} Books Shyamnagar. All rights reserved.
         </div>
       </div>
     </footer>
