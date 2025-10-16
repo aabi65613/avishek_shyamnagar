@@ -1,9 +1,10 @@
-// src/components/Footer.tsx - REMOVED framer-motion
+// src/components/Footer.tsx - FINAL FIX FOR BUILD CRASH
 
 import Link from "next/link";
 import { MoveUp } from "lucide-react";
 
-const Footer: React.FC = () => {
+// CRITICAL FIX: Removed the ": React.FC" type annotation
+const Footer = () => { 
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
