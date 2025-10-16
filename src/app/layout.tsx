@@ -8,9 +8,7 @@ import Header from "@/components/Header";
 // Import the Footer and Toaster (critical for UI functionality)
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
-// Assuming you have a Product and Cart Provider set up (using placeholder for now)
-// import { ProductProvider } from "@/context/ProductContext"; 
-// import { CartProvider } from "@/context/CartContext"; 
+// CartProvider and useCart are REMOVED here to fix the build error
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,21 +26,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* Placeholder for Providers to avoid Type Errors */}
-        {/* <ProductProvider>
-        <CartProvider> */}
+        {/* Only include necessary wrappers */}
+        {/* <ProductProvider> */}
         
           <div className="flex flex-col min-h-screen">
-            <Header /> {/* 1. The new Header component */}
+            <Header /> {/* Includes the golden color fix */}
             <main className="flex-grow">
               {children}
             </main>
-            <Footer /> {/* 2. The previously fixed Footer component */}
+            <Footer />
           </div>
-          <Toaster /> {/* 3. The Toaster component for notifications */}
+          <Toaster />
 
-        {/* </CartProvider>
-        </ProductProvider> */}
+        {/* </ProductProvider> */}
       </body>
     </html>
   );
