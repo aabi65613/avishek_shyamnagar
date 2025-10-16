@@ -1,4 +1,4 @@
-// src/components/ui/toaster.tsx - FINAL FIX: Correcting the circular import path
+// src/components/ui/textarea.tsx - FINAL FIX for Type Error
 
 "use client";
 
@@ -8,8 +8,7 @@ import {
   ToastDescription,
   ToastProvider,
   ToastTitle,
-} from "./toast"; // <-- CRITICAL FIX: Use relative path to break the loop
-
+} from "@/components/ui/toast";
 import { useToast } from "@/hooks/use-toast";
 
 export function Toaster() {
@@ -22,6 +21,7 @@ export function Toaster() {
           <Toast key={id} {...props}>
             <div className="grid gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
+              {/* This check makes the code safe: it only renders the description if it exists */}
               {description && (
                 <ToastDescription>{description}</ToastDescription>
               )}
@@ -34,3 +34,8 @@ export function Toaster() {
     </ToastProvider>
   );
 }
+
+// NOTE: It is unusual for this component to be in 'textarea.tsx'.
+// We are naming the export 'Toaster' which is standard.
+// If this file is meant to be a text area, you have pasted the wrong code into it.
+// This fix assumes the goal is to make the toast system work.
