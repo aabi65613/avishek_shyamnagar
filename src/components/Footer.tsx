@@ -1,27 +1,14 @@
-// src/components/Footer.tsx
-"use client"; // Required for motion
-
+// src/components/Footer.tsx - CLEANED OF FRAMER-MOTION
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail } from 'lucide-react'; // Added Mail icon for completeness
+import { Phone, Mail } from 'lucide-react'; 
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const phoneNumber = "7059068366";
   const email = "contact@books.shyamnagar.com"; // Placeholder Email
 
-  // Animation for the footer links
-  const linkVariants = {
-    hover: { 
-      scale: 1.05, 
-      color: 'var(--secondary-color)', // Gold color on hover
-      transition: { duration: 0.1 } 
-    },
-    rest: { 
-      scale: 1, 
-      color: 'var(--text-color)', // Default text color
-    }
-  };
+  // Removed linkVariants animation object
 
   return (
     <footer className="bg-primary-color text-white py-10 mt-16 shadow-inner">
@@ -44,16 +31,17 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-3 border-b border-secondary-color pb-1">Quick Links</h4>
             <div className="flex flex-col space-y-2 text-sm">
               <Link href="/">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Home</motion.a>
+                {/* Changed motion.a back to standard a tag and removed animation props */}
+                <a className="hover:text-secondary-color transition-colors">Home</a>
               </Link>
               <Link href="/#categories">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Categories</motion.a>
+                <a className="hover:text-secondary-color transition-colors">Categories</a>
               </Link>
               <Link href="/cart">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">View Cart</motion.a>
+                <a className="hover:text-secondary-color transition-colors">View Cart</a>
               </Link>
               <Link href="/contact">
-                <motion.a whileHover="hover" initial="rest" variants={linkVariants} className="hover:text-secondary-color transition-colors">Contact</motion.a>
+                <a className="hover:text-secondary-color transition-colors">Contact</a>
               </Link>
             </div>
           </div>
