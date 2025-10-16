@@ -1,19 +1,19 @@
-// src/components/ui/toaster.tsx - FIXING IMPORT PATH
+// src/components/ui/toaster.tsx - FIXING CIRCULAR DEPENDENCY
 
-"use client";
+"use client"
 
+import { useToast } from "@/hooks/use-toast"
 import {
   Toast,
   ToastClose,
   ToastDescription,
   ToastProvider,
   ToastTitle,
-} from "./toast"; // <-- CRITICAL: Uses relative path to read the restored file
-
-import { useToast } from "@/hooks/use-toast";
+  ToastViewport,
+} from "./toast" // <-- CRITICAL FIX: Changed from "@/components/ui/toast" to "./toast"
 
 export function Toaster() {
-  const { toasts } = useToast();
+  const { toasts } = useToast()
 
   return (
     <ToastProvider>
@@ -29,8 +29,9 @@ export function Toaster() {
             {action}
             <ToastClose />
           </Toast>
-        );
+        )
       })}
+      <ToastViewport />
     </ToastProvider>
-  );
+  )
 }
