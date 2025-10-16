@@ -1,4 +1,5 @@
-// src/components/ProductCard.tsx
+// src/components/ProductCard.tsx - FINAL CLEANUP (Framer Motion Removed)
+
 "use client";
 
 import React from 'react';
@@ -7,42 +8,27 @@ import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
 
+// NOTE: The 'framer-motion' import was removed here.
+
 interface ProductCardProps {
   product: Product;
-  // Index is needed to make the cards appear one after another (staggered effect)
+  // Index is no longer needed as the staggered effect is removed
   index: number; 
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
-  // --- PREMIUM ANIMATION LOGIC ---
-  const motionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        duration: 0.5, 
-        delay: index * 0.05, // Staggered delay for a smooth wave effect
-      } 
-    },
-    hover: { 
-      scale: 1.05, // Subtle scale up on hover
-      boxShadow: "0 15px 30px rgba(0,0,0,0.1)", // Shadow for depth
-      transition: { duration: 0.2 } 
-    }
-  };
-  // -------------------------------
+  // --- PREMIUM ANIMATION LOGIC REMOVED ---
+  // The 'motionVariants' object was removed here.
+  // ----------------------------------------
 
   return (
-    <motion.div
-      variants={motionVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover="hover"
-      // Applied new primary/secondary colors
-      className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100"
+    // Replaced <motion.div> with standard <div> and removed all animation props
+    <div
+      // Kept staggered effect logic for index in case it's used elsewhere, but not needed here.
+      // Removed variants={motionVariants}, initial="hidden", animate="visible", whileHover="hover"
+      className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl transform hover:scale-[1.03]"
     >
       <Link href={`/products/${product.id}`} className="relative block h-56 w-full">
         <Image
@@ -73,20 +59,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
 
         {/* Price using primary color */}
         <div className="text-xl font-bold text-primary-color mb-3 mt-auto">
-          ${product.price.toFixed(2)}
+          ₹{product.price.toFixed(2)}
         </div>
 
-        {/* Add to Cart Button (Animated) */}
-        <motion.button
+        {/* Add to Cart Button (Standard) */}
+        {/* Replaced <motion.button> with standard <button> and removed whileTap */}
+        <button
           onClick={() => addToCart(product)}
-          // Motion to make the button feel responsive
-          whileTap={{ scale: 0.95 }}
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
         >
           Add to Cart
-        </motion.button>
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
