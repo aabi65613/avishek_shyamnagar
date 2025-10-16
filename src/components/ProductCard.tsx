@@ -1,4 +1,4 @@
-// src/components/ProductCard.tsx - FINAL FIX: Make 'index' optional
+// src/components/ProductCard.tsx - FINAL CLEAN VERSION (Fixed index, Rupee, NO framer-motion)
 
 "use client";
 
@@ -10,8 +10,7 @@ import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
   product: Product;
-  // CRITICAL FIX: Make index optional (with '?') to satisfy other components 
-  // that don't pass it (like FeaturedProductsSlider.tsx).
+  // This prop is optional to satisfy components that don't pass it
   index?: number; 
 }
 
@@ -19,7 +18,7 @@ interface ProductCardProps {
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'INR',
+    currency: 'INR', // INR = Indian Rupee
     minimumFractionDigits: 2,
   }).format(amount);
 };
