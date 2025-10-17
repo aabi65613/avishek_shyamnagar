@@ -1,56 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // Import the Next.js Image component
-import { BookOpen, Gift, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
+import { BookOpen, Gift, ShoppingBag, Layers } from 'lucide-react';
 
-// --- 1. Import Local Images ---
-// WARNING: YOU MUST CHANGE THESE IMPORT PATHS TO MATCH YOUR ACTUAL IMAGE FILENAMES!
-// Example: If your first product image is named IMG_A.jpg, change image1 from
-// '@assets/products/image_1.jpg' to '@assets/products/IMG_A.jpg'
-import image1 from '@/assets/products/image_1.jpg'; 
-import image2 from '@/assets/products/image_2.jpg';
-import image3 from '@/assets/products/image_3.jpg';
-import image4 from '@/assets/products/image_4.jpg';
-// ------------------------------
+// --- 1. IMPORT DATA ---
+// Importing the product list from your new data file.
+import { demoProducts } from '@/data/products';
+// ----------------------
 
+// Filter the first four products to use as "Featured"
+const featuredProducts = demoProducts.slice(0, 4);
 
-// Mock data for featured products
-const featuredProducts = [
-  {
-    id: 1,
-    category: 'FICTION',
-    title: 'The Great Adventures of...',
-    price: 799.00,
-    imageUrl: image1, // Using the imported image object (must be connected to the right file!)
-  },
-  {
-    id: 2,
-    category: 'TECHNOLOGY',
-    title: 'Coding Handbook for...',
-    price: 1250.50,
-    imageUrl: image2, // Using the imported image object
-  },
-  {
-    id: 3,
-    category: 'LIFESTYLE',
-    title: 'The Secret to Simple Living',
-    price: 550.00,
-    imageUrl: image3, // Using the imported image object
-  },
-  {
-    id: 4,
-    category: 'EDUCATION',
-    title: 'Math Problems Solved',
-    price: 600.00,
-    imageUrl: image4, // Using the imported image object
-  },
-];
-
-// Mock data for categories
+// Mock data for categories (using the icons you had before)
 const categories = [
-  { name: 'Books', icon: BookOpen, description: 'Fiction, non-fiction, and academic texts.' },
+  { name: 'Brushes & Tools', icon: Layers, description: 'Tools for personal care and hobbies.' },
+  { name: 'Stationery', icon: BookOpen, description: 'Pens, notebooks, and writing materials.' },
+  { name: 'Apparel', icon: ShoppingBag, description: 'Comfortable and stylish clothing.' },
   { name: 'Gifts', icon: Gift, description: 'Scented candles, personalized items, and more.' },
-  { name: 'Bags', icon: ShoppingBag, description: 'Totes and custom bags for book lovers.' },
 ];
 
 const ProductCard = ({ product }: { product: typeof featuredProducts[0] }) => (
@@ -65,17 +31,18 @@ const ProductCard = ({ product }: { product: typeof featuredProducts[0] }) => (
         </h3>
       </div>
       
-      {/* --- Using Next.js Image Component for better rendering --- */}
+      {/* --- Using Next.js Image Component with string URLs from the public folder --- */}
       <div className="relative w-full h-40 mt-3 mb-4 rounded-lg overflow-hidden bg-gray-100">
+          {/* Note: src is now a string like "/IMG_2025..." */}
           <Image 
               src={product.imageUrl} 
               alt={product.title}
-              fill // Stretches the image to fill the parent div
+              fill
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 768px) 50vw, 25vw"
           />
       </div>
-      {/* ----------------------------------------- */}
+      {/* -------------------------------------------------------------------------- */}
 
       <div className="flex justify-between items-center mt-3">
         <span className="text-xl font-extrabold text-primary-color">
@@ -142,7 +109,7 @@ const HomePage = () => {
           <h2 className="text-3xl font-bold text-primary-color mb-10 text-center">
             Explore Our Categories
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {categories.map((category) => (
               <div key={category.name} className="bg-white p-6 rounded-xl shadow-md text-center border-t-4 border-primary-color transition-shadow hover:shadow-xl">
                 <category.icon className="w-8 h-8 text-primary-color mx-auto mb-3" />
