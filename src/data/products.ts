@@ -5,18 +5,19 @@ export interface Product {
   name: string;
   category: string;
   price: number;
-  imageUrl: string; // Path to your image in the /public folder
+  imageUrl: string;
   description?: string;
 }
 
-// Corrected product data
+// CORRECTED PRODUCT DATA WITH YOUR EXACT IMAGE FILENAMES
 export const demoProducts: Product[] = [
   {
     id: '1',
     name: "Artists' Water Colours",
     category: "Art Supplies",
     price: 150.00,
-    imageUrl: "/images/products/camel-water-colours.jpg", // Make sure you have this image in /public/images/products/
+    // This is the Camel Water Colours box
+    imageUrl: "/IMG_20251011_221013_733.jpg",
     description: "High-quality water colours for professional artists and students."
   },
   {
@@ -24,7 +25,8 @@ export const demoProducts: Product[] = [
     name: "Cello Soft Write Ball Pen",
     category: "Stationery",
     price: 10.00,
-    imageUrl: "/images/products/cello-soft-write.jpg", // Make sure you have this image
+    // This is the Cello pen
+    imageUrl: "/IMG_20251011_221826_587.jpg",
     description: "A smooth writing ball pen for everyday use."
   },
   {
@@ -32,7 +34,8 @@ export const demoProducts: Product[] = [
     name: "Deluxe Chessmen Set",
     category: "Games & Hobbies",
     price: 250.00,
-    imageUrl: "/images/products/deluxe-chessmen.jpg", // Make sure you have this image
+    // This is the Chess set
+    imageUrl: "/IMG_20251011_221652_317.jpg",
     description: "A classic deluxe chess set for players of all levels."
   },
   {
@@ -40,7 +43,8 @@ export const demoProducts: Product[] = [
     name: "Fevicryl Glass Colours",
     category: "Art Supplies",
     price: 120.00,
-    imageUrl: "/images/products/fevicryl-glass-colours.jpg", // Make sure you have this image
+    // This is the Fevicryl box
+    imageUrl: "/IMG_20251011_221710_762.jpg",
     description: "Vibrant and easy-to-use glass colours for creative projects."
   },
   {
@@ -48,7 +52,8 @@ export const demoProducts: Product[] = [
     name: "Golden Zari Thread Spool",
     category: "Craft Supplies",
     price: 85.00,
-    imageUrl: "/images/products/golden-ribbon.jpg", // Make sure you have this image
+    // This is the golden ribbon
+    imageUrl: "/IMG_20251011_221616_284.jpg",
     description: "Shiny golden thread for embroidery and craft work."
   },
   {
@@ -56,7 +61,8 @@ export const demoProducts: Product[] = [
     name: "Premium Sketchbook",
     category: "Stationery",
     price: 180.00,
-    imageUrl: "/images/products/sketchbook.jpg", // You can add a placeholder image here for now
+    // You have not provided an image for this, you can add one later
+    imageUrl: "/placeholder.jpg", 
     description: "A5 size sketchbook with high-quality paper for drawing."
   }
 ];
