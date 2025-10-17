@@ -1,68 +1,48 @@
-// src/components/FeaturedProductsSlider.tsx
-"use client"; // Required for Swiper component
+// File: src/components/FeaturedProductsSlider.tsx
+"use client";
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'; // Import desired modules
-import { demoProducts } from '@/data/products'; // Import demo products
-import ProductCard from './ProductCard'; // Reuse the ProductCard component
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { demoProducts } from '@/data/products';
+import ProductCard from './ProductCard';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade'; // Import fade effect CSS if using it
 
 const FeaturedProductsSlider = () => {
-  // Select a subset of products to feature in the slider (e.g., first 6)
+  // Select products to feature in the slider
   const featuredProducts = demoProducts.slice(0, 6);
 
   return (
-    <section id="featured" className="py-12 md:py-16 bg-gray-50">
+    <section id="featured" className="py-16 bg-gray-50/50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Featured Products</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900">
+          Featured Products
+        </h2>
         <Swiper
-          // Install Swiper modules
-          modules={[Navigation, Pagination, Autoplay, EffectFade]} // Add EffectFade for smooth transitions
-          spaceBetween={30} // Space between slides
-          slidesPerView={1} // Default slides per view
-          loop={true} // Enable looping
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          loop={true}
           autoplay={{
-            delay: 4000, // Autoplay delay in ms
-            disableOnInteraction: false, // Autoplay continues after user interaction
+            delay: 4000,
+            disableOnInteraction: false,
           }}
-          pagination={{ clickable: true }} // Enable clickable pagination dots
-          navigation={true} // Enable navigation arrows
-          effect="fade" // Use fade effect for single slide view
-          fadeEffect={{
-             crossFade: true // Enable cross-fade for smoother transitions
-          }}
-          className="pb-10" // Add padding bottom for pagination dots
-          // Responsive breakpoints
+          pagination={{ clickable: true }}
+          navigation={true}
+          className="pb-12" // Padding for pagination
           breakpoints={{
-            // when window width is >= 640px
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-              effect: "slide", // Switch back to slide effect for multiple views
-            },
-            // when window width is >= 1024px
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-              effect: "slide",
-            },
-             // when window width is >= 1280px
-            1280: {
-              slidesPerView: 4,
-              spaceBetween: 30,
-              effect: "slide",
-            },
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+            1280: { slidesPerView: 4, spaceBetween: 30 },
           }}
         >
           {featuredProducts.map((product) => (
-            <SwiperSlide key={product.id} className="h-auto pb-4"> {/* Ensure slides adapt height */}
-              <div className="h-full"> {/* Wrapper to ensure card takes full height */} 
+            <SwiperSlide key={product.id} className="h-auto">
+              <div className="h-full">
                 <ProductCard product={product} />
               </div>
             </SwiperSlide>
@@ -74,4 +54,3 @@ const FeaturedProductsSlider = () => {
 };
 
 export default FeaturedProductsSlider;
-
