@@ -1,6 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Next.js Image component
 import { BookOpen, Gift, ShoppingBag } from 'lucide-react';
+
+// --- 1. Import Local Images ---
+// WARNING: YOU MUST CHANGE THESE IMPORT PATHS TO MATCH YOUR ACTUAL IMAGE FILENAMES!
+// Example: If your first product image is named IMG_A.jpg, change image1 from
+// '@assets/products/image_1.jpg' to '@assets/products/IMG_A.jpg'
+import image1 from '@/assets/products/image_1.jpg'; 
+import image2 from '@/assets/products/image_2.jpg';
+import image3 from '@/assets/products/image_3.jpg';
+import image4 from '@/assets/products/image_4.jpg';
+// ------------------------------
+
 
 // Mock data for featured products
 const featuredProducts = [
@@ -9,28 +21,28 @@ const featuredProducts = [
     category: 'FICTION',
     title: 'The Great Adventures of...',
     price: 799.00,
-    imageUrl: 'https://placehold.co/400x550/0f172a/9ca3af?text=Adventure',
+    imageUrl: image1, // Using the imported image object (must be connected to the right file!)
   },
   {
     id: 2,
     category: 'TECHNOLOGY',
     title: 'Coding Handbook for...',
     price: 1250.50,
-    imageUrl: 'https://placehold.co/400x550/0f172a/9ca3af?text=Code+Guide',
+    imageUrl: image2, // Using the imported image object
   },
   {
     id: 3,
     category: 'LIFESTYLE',
     title: 'The Secret to Simple Living',
     price: 550.00,
-    imageUrl: 'https://placehold.co/400x550/0f172a/9ca3af?text=Lifestyle',
+    imageUrl: image3, // Using the imported image object
   },
   {
     id: 4,
     category: 'EDUCATION',
     title: 'Math Problems Solved',
     price: 600.00,
-    imageUrl: 'https://placehold.co/400x550/0f172a/9ca3af?text=Math',
+    imageUrl: image4, // Using the imported image object
   },
 ];
 
@@ -53,17 +65,23 @@ const ProductCard = ({ product }: { product: typeof featuredProducts[0] }) => (
         </h3>
       </div>
       
-      {/* Placeholder image representation */}
-      <div className="my-3 flex items-center justify-center h-40 bg-gray-50 rounded-lg">
-          <p className="text-gray-400 text-sm">Image Placeholder</p>
+      {/* --- Using Next.js Image Component for better rendering --- */}
+      <div className="relative w-full h-40 mt-3 mb-4 rounded-lg overflow-hidden bg-gray-100">
+          <Image 
+              src={product.imageUrl} 
+              alt={product.title}
+              fill // Stretches the image to fill the parent div
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 50vw, 25vw"
+          />
       </div>
+      {/* ----------------------------------------- */}
 
       <div className="flex justify-between items-center mt-3">
         <span className="text-xl font-extrabold text-primary-color">
           ₹{product.price.toFixed(2)}
         </span>
         <button
-          // Note: This button does not use "addToCart" logic, ensuring a safe build.
           className="bg-deep-navy text-white px-4 py-2 rounded-lg font-medium hover:bg-deep-navy/90 transition-colors shadow-md"
         >
           Add to Cart
