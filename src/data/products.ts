@@ -1,122 +1,62 @@
-// src/data/products.ts
-import { Product } from "@/types/product";
+// File: src/data/products.ts
 
-// Demo product data - easy to edit
-// IMPORTANT: All image paths now assume the file is directly in the /public folder (e.g., /1000486851.jpg).
+export interface Product {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  imageUrl: string; // Path to your image in the /public folder
+  description?: string;
+}
 
+// Corrected product data
 export const demoProducts: Product[] = [
-  // Product 1: Brush (using IMG_20251011_221013_733.jpg)
   {
-    id: 1,
-    category: "Brushes & Tools",
-    title: "Extremely Soft Brush",
-    price: 25.00,
-    description: "Brushes that reach every corner of your teeth.",
-    imageUrl: "/IMG_20251011_221013_733.jpg", 
-  },
-  // Product 2: Pen (using IMG_20251011_221616_284.jpg)
-  {
-    id: 2,
-    category: "Stationery",
-    title: "Red Pen",
-    price: 10.00,
-    description: "Extra smooth flow.",
-    imageUrl: "/IMG_20251011_221616_284.jpg", 
-  },
-  // Product 3: Water Color (using IMG_20251011_221652_317.jpg)
-  {
-    id: 3,
+    id: '1',
+    name: "Artists' Water Colours",
     category: "Art Supplies",
-    title: "Water Color Set",
-    price: 50.00,
-    description: "Premium quality set at a heavy discount.",
-    imageUrl: "/IMG_20251011_221652_317.jpg", 
+    price: 150.00,
+    imageUrl: "/images/products/camel-water-colours.jpg", // Make sure you have this image in /public/images/products/
+    description: "High-quality water colours for professional artists and students."
   },
-  // Product 4: Black Shirt (using IMG_20251011_221710_762.jpg)
   {
-    id: 4,
-    category: "Apparel",
-    title: "Black Comfort Shirt",
-    price: 518.75,
-    description: "Super comfortable shirt",
-    imageUrl: "/IMG_20251011_221710_762.jpg", 
+    id: '2',
+    name: "Cello Soft Write Ball Pen",
+    category: "Stationery",
+    price: 10.00,
+    imageUrl: "/images/products/cello-soft-write.jpg", // Make sure you have this image
+    description: "A smooth writing ball pen for everyday use."
   },
-  // Product 5: Glue (using IMG_20251011_221826_587.jpg)
   {
-    id: 5,
-    category: "Hobby & Craft",
-    title: "3D Printed Glue",
-    price: 99.00,
-    description: "Beginner friendly design helper",
-    imageUrl: "/IMG_20251011_221826_587.jpg", 
+    id: '3',
+    name: "Deluxe Chessmen Set",
+    category: "Games & Hobbies",
+    price: 250.00,
+    imageUrl: "/images/products/deluxe-chessmen.jpg", // Make sure you have this image
+    description: "A classic deluxe chess set for players of all levels."
   },
-  // Product 6: Deep Black Shirt (using IMG_20251011_221833_765.jpg)
   {
-    id: 6,
-    category: "Apparel",
-    title: "Deep Black T-Shirt",
-    price: 559.95,
-    description: "Comfortable",
-    imageUrl: "/IMG_20251011_221833_765.jpg", 
+    id: '4',
+    name: "Fevicryl Glass Colours",
+    category: "Art Supplies",
+    price: 120.00,
+    imageUrl: "/images/products/fevicryl-glass-colours.jpg", // Make sure you have this image
+    description: "Vibrant and easy-to-use glass colours for creative projects."
   },
-  // Product 7: Candle Set (using original uploaded name 1000486851.jpg)
   {
-    id: 7,
-    category: "Gifts",
-    title: "Scented Candle Set",
-    price: 29.99,
-    description: "Set of 3 relaxing aromatherapy candles.",
-    imageUrl: "/1000486851.jpg", 
+    id: '5',
+    name: "Golden Zari Thread Spool",
+    category: "Craft Supplies",
+    price: 85.00,
+    imageUrl: "/images/products/golden-ribbon.jpg", // Make sure you have this image
+    description: "Shiny golden thread for embroidery and craft work."
   },
-  // Product 8: Using uploaded image 1000486856.jpg
   {
-    id: 8,
-    category: "Gifts",
-    title: "Personalized Mug",
-    price: 12.50,
-    description: "Customizable mug, perfect for any occasion.",
-    imageUrl: "/1000486856.jpg", 
-  },
-  // Product 9: Using uploaded image 1000486857.jpg
-  {
-    id: 9,
-    category: "Experimental Items",
-    title: "DIY Terrarium Kit",
-    price: 45.00,
-    description: "Create your own mini ecosystem.",
-    imageUrl: "/1000486857.jpg", 
-  },
-  // Product 10: Using uploaded image 1000486858.jpg
-  {
-    id: 10,
-    category: "Experimental Items",
-    title: "Levitating Plant Pot",
-    price: 89.99,
-    description: "A unique pot that floats using magnetic levitation.",
-    imageUrl: "/1000486858.jpg", 
-  },
-  // Product 11: Using uploaded image 1000486850.jpg
-  {
-    id: 11,
-    category: "Books",
-    title: "The Midnight Library",
-    price: 16.50,
-    description: "A novel about choices, regrets, and finding hope.",
-    imageUrl: "/1000486850.jpg", 
-  },
-  // Product 12: Using uploaded image 1000486455.jpg
-  {
-    id: 12,
-    category: "Skincare",
-    title: "Gentle Face Cleanser",
-    price: 19.99,
-    description: "Removes impurities without drying the skin.",
-    imageUrl: "/1000486455.jpg", 
-  },
+    id: '6',
+    name: "Premium Sketchbook",
+    category: "Stationery",
+    price: 180.00,
+    imageUrl: "/images/products/sketchbook.jpg", // You can add a placeholder image here for now
+    description: "A5 size sketchbook with high-quality paper for drawing."
+  }
 ];
-
-// Function to get all unique categories from the products
-export const getCategories = (): string[] => {
-  const categories = demoProducts.map(product => product.category);
-  return [...new Set(categories)]; // Return unique category names
-};
