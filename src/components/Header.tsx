@@ -4,13 +4,10 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 
-// Assuming the original component used the actual cart context or a dummy value elsewhere.
-// Reverting to a simple structure without the gold color.
-
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
-    // Using a simple dummy value for cart count to avoid reliance on the broken hook
+    // Using 0 ensures no count badge is shown, avoiding issues with cart context
     const DUMMY_CART_COUNT = 0; 
 
     return (
@@ -18,7 +15,7 @@ const Header = () => {
         <header className="sticky top-0 z-50 bg-deep-navy shadow-lg">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                 
-                {/* 1. Logo/Site Title - Reverted to white/default color */}
+                {/* 1. Logo/Site Title - Reverted to white text */}
                 <Link href="/" className="text-2xl font-extrabold tracking-tight text-white">
                     <span>Books Shyamnagar</span>
                 </Link>
