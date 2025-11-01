@@ -1,4 +1,4 @@
-// src/data/products.ts
+ // src/data/products.ts
 import { Product } from "@/types/product";
 
 // Demo product data - easy to edit
