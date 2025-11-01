@@ -113,6 +113,15 @@ export const demoProducts: Product[] = [
     description: "Removes impurities without drying the skin.",
     imageUrl: "/1000486455.jpg", 
   },
+  // Product 13: Red Plastic Tape Dispenser (using IMG_20251101_155800_289.jpg)
+  {
+    id: 13,
+    category: "Stationery",
+    title: "Heavy-Duty Tape Dispenser",
+    price: 150.00, // Estimated INR price
+    description: "A durable, heavy-duty red plastic tape dispenser with a serrated cutter, perfect for desktop use in homes, offices, or schools.",
+    imageUrl: "/IMG_20251101_155800_289.jpg", 
+  },
 ];
 
 // Function to get all unique categories from the products
