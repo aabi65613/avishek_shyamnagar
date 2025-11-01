@@ -13,7 +13,7 @@ export const demoProducts: Product[] = [
     price: 25.00,
     description: "Brushes that reach every corner of your teeth.",
     imageUrl: "/IMG_20251011_221013_733.jpg", 
-  },
+  }, 
   // Product 2: Pen (using IMG_20251011_221616_284.jpg)
   {
     id: 2,
