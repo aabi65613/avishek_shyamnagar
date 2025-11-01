@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Added Features and Dependencies
+
+### Framer Motion for Animations
+
+The `framer-motion` library has been installed to add smooth, modern animations to the application.
+
+**Installation Command (Already Executed):**
+
+```bash
+pnpm add framer-motion
+```
+
+**Components Updated:**
+
+*   **`src/components/HeroSection.tsx`**: Implemented a smooth, staggered entrance animation for the title and tagline using `motion.h1` and `motion.p`.
+*   **`src/components/ProductCard.tsx`**: Implemented a staggered entrance animation for product cards and an enhanced `whileHover` scale effect.

@@ -2,11 +2,12 @@
 "use client";
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-// import { motion } from 'framer-motion'; 
+ 
 
 interface ProductCardProps {
   product: Product;
@@ -26,8 +27,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
   const { addToCart } = useCart();
 
   return (
-    <div
+    <motion.div
       className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ scale: 1.05 }}
     >
       <Link href={`/products/${product.id}`} className="relative block h-56 w-full">
         <Image
@@ -66,10 +71,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
         >
           Add to Cart
-        </button>
+        </butto</div>
       </div>
-    </div>
-  );
+    </motion.div>;
 };
 
 export default ProductCard;

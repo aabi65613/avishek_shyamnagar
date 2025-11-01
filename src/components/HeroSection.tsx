@@ -2,6 +2,7 @@
 "use client"; // Needed for useState and useEffect hooks
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 // Removed Image import as we are using a CSS background for now
 
 const HeroSection = () => {
@@ -62,24 +63,29 @@ const HeroSection = () => {
       {/* Ensure content is above the background/overlay */}
       <div className="relative z-20 text-center px-4">
         {/* Animated Title */}
-        <h1
-          className={`text-5xl md:text-7xl font-bold text-gray-800 mb-4 transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-          style={{ transitionDelay: '200ms' }}
+        <motion.h1
+          className="text-5xl md:text-7xl font-bold text-gray-800 mb-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
         >
           Books.shyamnagar
-        </h1>
+        </motion.h1>
 
         {/* Animated Tagline with Hover Effect */}
-        <p
-          className={`text-xl md:text-3xl font-medium transition-transform duration-700 ease-out ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-          style={{ ...taglineStyle, transitionDelay: '400ms' }} // Combine styles and stagger animation
+        <motion.p
+          className="text-xl md:text-3xl font-medium"
+          style={taglineStyle}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onTouchStart={handleMouseEnter} // Handle touch start
-          onTouchEnd={handleMouseLeave}   // Handle touch end
+          onTouchStart={handleMouseEnter}
+          onTouchEnd={handleMouseLeave}
         >
           Discount beyond your expectations.
-        </p>
+        </motion.p>
       </div>
     </section>
   );
