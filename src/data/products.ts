@@ -131,6 +131,105 @@ export const demoProducts: Product[] = [
     description: "A vibrant, pink-themed pencil pouch featuring popular princess characters. Ideal for school children to organize their pens, pencils, and other stationery.",
     imageUrl: "/IMG_20251101_155848_253.jpg", 
   },
+  // Product 15: Camlin Unruled Notebook (using IMG_20251101_161203_085.jpg)
+  {
+    id: 15,
+    category: "Handwritten Book/Copy",
+    title: "Camlin Unruled Notebook (Plain Cover)",
+    price: 40.00, // Estimated INR price
+    description: "A standard, high-quality Camlin unruled notebook. Perfect for general note-taking, drawing, and school work.",
+    imageUrl: "/IMG_20251101_161203_085.jpg", 
+  },
+  // Product 16: Camlin Unruled Notebook (Bicycle Cover) (using IMG_20251101_161216_390.jpg)
+  {
+    id: 16,
+    category: "Handwritten Book/Copy",
+    title: "Camlin Unruled Notebook (Bicycle Cover)",
+    price: 45.00,
+    description: "A high-quality, unruled notebook from Camlin, featuring a vibrant bicycle cover design. Ideal for sketching, note-taking, or creative writing. Standard A4 size, 100 pages.",
+    imageUrl: "/IMG_20251101_161216_390.jpg",
+  },
+  // Product 17: Set of 6 Colorful Gel Pens (using IMG_20251101_161308_512.jpg)
+  {
+    id: 17,
+    category: "Stationery",
+    title: "Set of 6 Colorful Gel Pens",
+    price: 99.00,
+    description: "A set of six smooth-writing gel pens in assorted vibrant colors. Perfect for highlighting, journaling, and adding a splash of color to notes and artwork.",
+    imageUrl: "/IMG_20251101_161308_512.jpg",
+  },
+  // Product 18: Cartoon Character Eraser Set (using IMG_20251101_161313_144.jpg)
+  {
+    id: 18,
+    category: "Stationery",
+    title: "Cartoon Character Eraser Set",
+    price: 30.00,
+    description: "A fun set of erasers shaped like popular cartoon characters. High-quality rubber for clean, smudge-free erasing. Great for kids and collectors.",
+    imageUrl: "/IMG_20251101_161313_144.jpg",
+  },
+  // Product 19: Transparent Geometry Box/Pencil Case (using IMG_20251101_161329_092.jpg)
+  {
+    id: 19,
+    category: "Stationery",
+    title: "Transparent Geometry Box/Pencil Case",
+    price: 120.00,
+    description: "A durable, transparent plastic pencil case or geometry box. Provides clear visibility of contents, making it easy to find pens, pencils, and other small stationery items.",
+    imageUrl: "/IMG_20251101_161329_092.jpg",
+  },
+  // Product 20: Miniature Stapler and Pin Set (using IMG_20251101_161348_044.jpg)
+  {
+    id: 20,
+    category: "Stationery",
+    title: "Miniature Stapler and Pin Set",
+    price: 75.00,
+    description: "A compact, easy-to-carry miniature stapler with a box of pins. Ideal for quick fixes, school projects, and portable office use.",
+    imageUrl: "/IMG_20251101_161348_044.jpg",
+  },
+  // Product 21: Colorful Paper Clips and Binder Clips Set (using IMG_20251101_161350_955.jpg)
+  {
+    id: 21,
+    category: "Stationery",
+    title: "Colorful Paper Clips and Binder Clips Set",
+    price: 50.00,
+    description: "An assortment of colorful paper clips and small binder clips for organizing documents and papers. Comes in a reusable plastic container.",
+    imageUrl: "/IMG_20251101_161350_955.jpg",
+  },
+  // Product 22: Large Capacity Pencil Pouch (Blue) (using IMG_20251101_161455_212.jpg)
+  {
+    id: 22,
+    category: "Stationery",
+    title: "Large Capacity Pencil Pouch (Blue)",
+    price: 150.00,
+    description: "A spacious, durable blue fabric pencil pouch with a zipper closure. Designed to hold a large number of pens, pencils, markers, and other school supplies.",
+    imageUrl: "/IMG_20251101_161455_212.jpg",
+  },
+  // Product 23: Set of 12 Color Pencils (using IMG_20251101_161504_020.jpg)
+  {
+    id: 23,
+    category: "Stationery",
+    title: "Set of 12 Color Pencils",
+    price: 120.00,
+    description: "A standard set of 12 high-quality color pencils. Features smooth lead for vibrant coloring and shading. Perfect for students and artists.",
+    imageUrl: "/IMG_20251101_161504_020.jpg",
+  },
+  // Product 24: Wooden Scale/Ruler (30cm) (using IMG_20251101_161512_767.jpg)
+  {
+    id: 24,
+    category: "Stationery",
+    title: "Wooden Scale/Ruler (30cm)",
+    price: 25.00,
+    description: "A classic 30cm wooden ruler with clear markings. Durable and essential for school, office, and crafting use.",
+    imageUrl: "/IMG_20251101_161512_767.jpg",
+  },
+  // Product 25: Assorted Fashion Jewelry Set (using jewelry.jpg)
+  {
+    id: 25,
+    category: "Jewelry",
+    title: "Assorted Fashion Jewelry Set",
+    price: 399.00,
+    description: "A collection of trendy fashion jewelry, including necklaces, earrings, and bracelets. Perfect for gifting or adding a stylish touch to any outfit.",
+    imageUrl: "/jewelry.jpg",
+  },
 ];
 
 // Function to get all unique categories from the products
