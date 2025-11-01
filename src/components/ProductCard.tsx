@@ -71,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           className="w-full bg-primary-color text-white py-2 rounded-lg font-medium transition-all duration-200 hover:bg-secondary-color focus:ring-2 focus:ring-secondary-color focus:ring-offset-2"
         >
           Add to Cart
-        </button>
+       </butto</div>
       </div>
     </motion.div>
 };
