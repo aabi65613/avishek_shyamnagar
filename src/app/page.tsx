@@ -7,11 +7,11 @@ import { demoProducts, getCategories } from '@/data/products';
 // import { motion } from 'framer-motion'; // COMMENTED OUT: Build Fix
 
 const HomePage = () => {
-  const products = demoProducts.slice(0, 9); // Display the first 9 products
+  const products = demoProducts; // Display all products
   const categories = getCategories();
 
   // Filter products by the first 9 available, if categories are not yet implemented fully
-  const featuredProducts = products.filter(p => p.id <= 9); 
+  const featuredProducts = products; 
 
   return (
     <div className="min-h-screen">
