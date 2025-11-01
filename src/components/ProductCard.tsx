@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           Add to Cart
         </button>
       </div>
-    </motion.div>;
+    </motion.div>
 };
 
 export default ProductCard;
