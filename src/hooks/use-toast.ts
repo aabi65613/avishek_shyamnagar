@@ -62,4 +62,4 @@ const addToRemoveQueue = (toastId: string) => {
     })
   }, TOAST_REMOVE_DELAY)
 
-  toastTimeouts.set(toast
+  toastTimeouts.set(toastId, timeout)
