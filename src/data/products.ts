@@ -122,6 +122,15 @@ export const demoProducts: Product[] = [
     description: "A durable, heavy-duty red plastic tape dispenser with a serrated cutter, perfect for desktop use in homes, offices, or schools.",
     imageUrl: "/IMG_20251101_155800_289.jpg", 
   },
+  // Product 14: Princess Pencil Box (using IMG_20251101_155848_253.jpg)
+  {
+    id: 14,
+    category: "Stationery",
+    title: "Princess Stationery Pouch",
+    price: 199.00, // Estimated INR price
+    description: "A vibrant, pink-themed pencil pouch featuring popular princess characters. Ideal for school children to organize their pens, pencils, and other stationery.",
+    imageUrl: "/IMG_20251101_155848_253.jpg", 
+  },
 ];
 
 // Function to get all unique categories from the products
