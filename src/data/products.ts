@@ -18,9 +18,9 @@ export const demoProducts: Product[] = [
   {
     id: 2,
     category: "Stationery",
-    title: "Red Pen",
+    title: "golden roopon",
     price: 11.00,
-    description: "Extra smooth flow.",
+    description: " exta shine.",
     imageUrl: "/IMG_20251011_221616_284.jpg", 
   },
   // Product 3: Water Color (using IMG_20251011_221652_317.jpg)
