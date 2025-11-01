@@ -19,7 +19,7 @@ export const demoProducts: Product[] = [
     id: 2,
     category: "Stationery",
     title: "Red Pen",
-    price: 10.00,
+    price: 11.00,
     description: "Extra smooth flow.",
     imageUrl: "/IMG_20251011_221616_284.jpg", 
   },
