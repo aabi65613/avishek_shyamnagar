@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
     <div
       className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col transition-all duration-300 border border-gray-100 hover:shadow-xl hover:scale-[1.03] transform"
     >
-      <Link href={`/products/${product.id}`} className="relative block h-56 w-full">
+      <Link href={`/products/${product.id.toString()}`} className="relative block h-56 w-full">
         <Image
           src={product.imageUrl}
           alt={product.title}
@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           {product.category}
         </p>
         <h3 className="text-lg font-semibold text-text-color mb-2 truncate">
-          <Link href={`/products/${product.id}`} className="hover:text-primary-color transition-colors">
+          <Link href={`/products/${product.id.toString()}`} className="hover:text-primary-color transition-colors">
             {product.title}
           </Link>
         </h3>
